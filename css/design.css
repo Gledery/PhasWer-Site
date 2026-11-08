@@ -636,9 +636,6 @@
 
     /* 毛玻璃演示：固定宽度容器允许收缩 */
     #glassDemoBg { max-width: 100%; }
-
-    /* 引擎芯片网格收紧 */
-    .demo-engine-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 6px; }
 }
 
 @media (max-width: 540px) {
@@ -651,7 +648,6 @@
     .section-intro { font-size: 13px; margin-bottom: 20px; }
     .subsection { padding: 16px 12px; margin-bottom: 20px; }
     .subsection-title { font-size: 15px; }
-    .demo-area { padding: 16px; }
     .code-block { font-size: 11px; padding: 10px 12px; }
     .radius-demo { gap: 10px; }
     .radius-item { width: 100px; height: 100px; }
@@ -717,25 +713,11 @@
     .glass-slider-wrap { padding: 10px 14px; font-size: 14px; gap: 8px; }
     .glass-reset-btn { padding: 10px 28px; font-size: 14px; }
 
-    /* about 卡片紧凑 */
-    .demo-about-card { padding: 12px; gap: 10px; }
-    .demo-about-logo, .demo-about-avatar { width: 40px; height: 40px; font-size: 16px; }
-    .demo-about-name { font-size: 15px; }
-
-    /* 引擎芯片紧凑 */
-    .demo-engine-chip { width: 72px; padding: 10px 4px 18px; font-size: 11px; }
-    .demo-engine-grid { grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); }
-
     /* 强调色色块紧凑 */
     .demo-accent-swatch { width: 24px; height: 24px; }
 
     /* 进度条紧凑 */
     .demo-storage-bar { width: 150px; }
-
-    /* 快捷方式拖拽项紧凑 */
-    .demo-shortcut-item { width: 60px; }
-    .demo-shortcut-icon { width: 38px; height: 38px; font-size: 15px; }
-    .demo-shortcut-name { font-size: 11px; }
 
     /* 滑块行最小宽度限制解除 */
     .pw-slider-row { min-width: 0 !important; }
@@ -1124,84 +1106,6 @@
     max-width: 460px;
 }
 
-/* Frostart switch */
-.demo-switch {
-    position: relative;
-    display: inline-block;
-    width: 48px;
-    height: 28px;
-    flex-shrink: 0;
-}
-
-.demo-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.demo-switch-slider {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: var(--radius-pill);
-    cursor: pointer;
-    transition: background-color var(--time-normal) ease;
-}
-
-.demo-switch-slider::before {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    left: 4px;
-    top: 4px;
-    background-color: #fff;
-    border-radius: 50%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    transition: transform var(--time-normal) cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.demo-switch input:checked + .demo-switch-slider {
-    background-color: var(--accent-color);
-}
-
-.demo-switch input:checked + .demo-switch-slider::before {
-    transform: translateX(20px);
-}
-
-/* Frostart slider */
-.demo-fs-slider {
-    flex: 1;
-    -webkit-appearance: none;
-    appearance: none;
-    height: 6px;
-    min-width: 120px;
-    border-radius: var(--radius-pill);
-    background: rgba(255, 255, 255, 0.5);
-    outline: none;
-    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.06);
-}
-
-.demo-fs-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--accent-color);
-    cursor: pointer;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    transition: transform var(--time-fast) ease;
-}
-
-.demo-fs-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.08);
-}
-
-.demo-fs-slider::-webkit-slider-thumb:active {
-    transform: scale(0.85);
-}
-
 /* Frostart text input */
 .demo-form-group {
     display: flex;
@@ -1220,6 +1124,7 @@
 
 /* —— 类型1：设置搜索（容器提供边框/胶囊/阴影，内层透明输入） —— */
 .demo-settings-search {
+    position: relative;
     max-width: 320px;
     height: 44px;
     border-radius: 9999px;
@@ -1398,15 +1303,16 @@
 .demo-option-btn {
     flex: 1;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
     gap: 6px;
-    padding: 12px 8px;
+    padding: 8px 14px;
     border-radius: 16px;
     background-color: rgba(255, 255, 255, 0.5);
     border: var(--border-glass);
     box-shadow: var(--shadow-sm);
-    font-size: 14px;
+    font-size: 12px;
     color: var(--text-secondary);
     cursor: pointer;
     max-width: 120px;
@@ -1437,16 +1343,18 @@
     border: var(--border-glass);
     box-shadow: var(--shadow-sm);
     cursor: pointer;
-    transition: transform var(--time-fast) ease, background-color var(--time-fast) ease, color var(--time-fast) ease;
+    transition: transform var(--time-fast) ease, background-color var(--time-fast) ease, color var(--time-fast) ease, box-shadow var(--time-fast) ease;
 }
 
 .demo-fs-preset:hover {
     background-color: var(--bg-hover);
     color: var(--text-primary);
+    box-shadow: var(--shadow-md);
 }
 
 .demo-fs-preset:active {
     transform: scale(0.85);
+    box-shadow: var(--shadow-sm);
 }
 
 .demo-fs-preset.active {
@@ -1768,226 +1676,6 @@
     margin: 4px 8px;
 }
 
-/* Frostart engine-chip 演示 */
-.demo-engine-chip {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 12px 6px 22px;
-    border-radius: 16px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border: var(--border-glass);
-    box-shadow: var(--shadow-sm);
-    font-size: 12px;
-    color: var(--text-secondary);
-    cursor: pointer;
-    width: 80px;
-    transition: transform var(--time-fast) ease, background-color var(--time-fast) ease;
-}
-
-.demo-engine-chip:not(.pinned) {
-    opacity: 0.55;
-}
-
-.demo-engine-chip:hover {
-    background-color: var(--bg-hover);
-    color: var(--text-primary);
-    opacity: 1;
-}
-
-.demo-engine-chip:active {
-    transform: scale(0.85);
-}
-
-.demo-engine-chip strong {
-    transition: transform var(--time-fast) ease;
-}
-
-.demo-engine-chip:hover strong {
-    transform: scale(1.1);
-}
-
-.demo-engine-chip.pinned {
-    background-color: color-mix(in srgb, var(--accent-color) 14%, rgba(255, 255, 255, 0.5));
-    border-color: color-mix(in srgb, var(--accent-color) 45%, transparent);
-    color: var(--text-primary);
-}
-
-.demo-engine-chip-check {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--accent-color);
-    color: #fff;
-    font-size: 10px;
-    opacity: 0;
-    transform: scale(0.5);
-    transition: opacity var(--time-fast) ease, transform var(--time-fast) cubic-bezier(0.34, 1.56, 0.64, 1);
-    pointer-events: none;
-}
-
-.demo-engine-chip.pinned .demo-engine-chip-check {
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* engine-chip 网格容器 */
-.demo-engine-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
-    gap: 8px;
-    max-width: 420px;
-}
-
-/* Frostart about-card 演示 */
-.demo-about-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px;
-    border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.5);
-    border: var(--border-glass);
-    box-shadow: var(--shadow-sm);
-    transition: transform var(--time-fast) ease, box-shadow var(--time-normal) ease;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-}
-
-.demo-about-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
-}
-
-.demo-about-card:active {
-    transform: scale(0.85);
-}
-
-.demo-about-logo,
-.demo-about-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 16px;
-    object-fit: contain;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 700;
-    font-size: 20px;
-}
-
-.demo-about-avatar {
-    border-radius: 50%;
-    background: linear-gradient(135deg, #5b6ee1, #7c8aef);
-}
-
-.demo-about-logo {
-    background: linear-gradient(135deg, #64acff, #ab8aff);
-}
-
-.demo-about-card-body {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    min-width: 0;
-    flex: 1;
-}
-
-.demo-about-card-title {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.demo-about-name {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-.demo-about-version {
-    font-size: 13px;
-    color: var(--text-secondary);
-}
-
-.demo-about-desc {
-    font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.5;
-    margin: 0;
-}
-
-.demo-about-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-.demo-about-tag {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: var(--radius-pill);
-    font-size: 11.5px;
-    color: var(--text-secondary);
-    background: color-mix(in srgb, var(--accent-color) 10%, rgba(255, 255, 255, 0.4));
-    border: 1px solid color-mix(in srgb, var(--accent-color) 20%, transparent);
-}
-
-.demo-about-note {
-    font-size: 11.5px;
-    color: var(--text-secondary);
-    opacity: 0.7;
-    margin: 0;
-}
-
-.demo-about-action-hint {
-    font-size: 12px;
-    color: var(--accent-color);
-}
-
-/* about-card 链接按钮组 */
-.demo-about-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 4px;
-}
-
-.demo-about-link-btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 7px 14px;
-    border-radius: var(--radius-pill);
-    font-size: 12px;
-    color: var(--text-secondary);
-    background: rgba(255, 255, 255, 0.5);
-    border: var(--border-glass);
-    text-decoration: none;
-    transition: transform var(--time-fast) ease, background-color var(--time-fast) ease, color var(--time-fast) ease;
-}
-
-.demo-about-link-btn:hover {
-    color: var(--accent-color);
-    background-color: var(--bg-hover);
-}
-
-.demo-about-link-btn:active {
-    transform: scale(0.85);
-}
-
 /* Frostart pack-download-card 演示 */
 .demo-pack-download-card {
     display: flex;
@@ -2108,75 +1796,543 @@
     transform: scale(0.85);
 }
 
-/* 拖拽演示 —— 对齐 Frostart shortcut-item 网格风格 */
-.demo-shortcut-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: center;
-}
+/* =========================================
+   第八部分：Frostart 新增标准控件演示样式
+   —— 数值与 frostart/css/settings.css、panels.css、components.css 当前版本对齐
+   —— 挂到 body 的浮层（select-menu / search-results）自带令牌，脱离 .fs-accent 作用域也能取到值
+   ========================================= */
 
-.demo-shortcut-item {
+/* —— 通用操作按钮 action-btn —— */
+.demo-action-btn {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    width: 80px;
-    padding: 8px 6px;
-    border-radius: 24px;
-    cursor: grab;
-    transition:
-        transform 0.3s cubic-bezier(0.2, 0.8, 0.4, 1),
-        opacity var(--time-fast) ease;
-}
-
-.demo-shortcut-item:hover {
-    transform: translateY(-6px);
-}
-
-.demo-shortcut-item:active {
-    transform: scale(0.9);
-}
-
-.demo-shortcut-item.dragging {
-    opacity: 0.3;
-    cursor: grabbing;
-    z-index: 10;
-}
-
-.demo-shortcut-item.drag-over {
-    transform: scale(1.05);
-}
-
-.demo-shortcut-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 20px;
-    font-weight: 700;
-    flex-shrink: 0;
+    padding: 10px 18px;
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-secondary, rgba(255, 255, 255, 0.5));
+    color: var(--text-secondary);
+    font-size: 13.5px;
+    white-space: nowrap;
+    border: var(--border-glass);
     box-shadow: var(--shadow-sm);
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    transition: transform var(--time-fast) ease, box-shadow var(--time-fast) ease;
+    cursor: pointer;
+    font-family: inherit;
+    transition:
+        transform var(--time-fast) ease,
+        background-color var(--time-fast) ease,
+        box-shadow var(--time-fast) ease;
 }
 
-.demo-shortcut-item:hover .demo-shortcut-icon {
-    transform: scale(1.08);
+.demo-action-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.demo-action-btn:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
     box-shadow: var(--shadow-md);
 }
 
-.demo-shortcut-name {
-    font-size: 12px;
-    color: var(--text-secondary);
-    text-align: center;
-    line-height: 1.2;
-    word-break: keep-all;
+.demo-action-btn:active {
+    transform: scale(0.85);
+    box-shadow: var(--shadow-sm);
 }
 
+/* 危险按钮（重置/清除）—— 淡红色调 */
+.demo-action-btn.danger-btn {
+    color: #c93535;
+    background-color: rgba(217, 69, 69, 0.08);
+    border-color: rgba(217, 69, 69, 0.2);
+}
+
+.demo-action-btn.danger-btn:hover {
+    background-color: rgba(217, 69, 69, 0.14);
+    color: #b52828;
+}
+
+/* 主操作按钮（更新/应用）—— accent 淡色调 */
+.demo-action-btn.accent-btn {
+    color: var(--accent-color);
+    background-color: color-mix(in srgb, var(--accent-color) 8%, transparent);
+    border-color: color-mix(in srgb, var(--accent-color) 22%, transparent);
+}
+
+.demo-action-btn.accent-btn:hover {
+    background-color: color-mix(in srgb, var(--accent-color) 15%, transparent);
+    color: var(--accent-color);
+}
+
+/* 有新版本：accent 渐变背景 + 右上角脉冲红点 */
+.demo-action-btn.has-update {
+    position: relative;
+    color: var(--accent-color);
+    background:
+        linear-gradient(135deg,
+            color-mix(in srgb, var(--accent-color) 14%, transparent),
+            transparent 60%),
+        var(--bg-secondary, rgba(255, 255, 255, 0.5));
+    border-color: color-mix(in srgb, var(--accent-color) 35%, transparent);
+}
+
+.demo-action-btn.has-update:hover {
+    background:
+        linear-gradient(135deg,
+            color-mix(in srgb, var(--accent-color) 20%, transparent),
+            transparent 60%),
+        var(--bg-hover);
+    color: var(--accent-color);
+}
+
+.demo-action-btn.has-update::after {
+    content: '';
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e84545;
+    box-shadow: 0 0 0 2px var(--bg-secondary, rgba(255, 255, 255, 0.5));
+    animation: demo-update-dot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes demo-update-dot-pulse {
+    0%, 100% { box-shadow: 0 0 0 2px var(--bg-secondary, rgba(255, 255, 255, 0.5)), 0 0 0 0 rgba(232, 69, 69, 0.5); }
+    50% { box-shadow: 0 0 0 2px var(--bg-secondary, rgba(255, 255, 255, 0.5)), 0 0 0 5px rgba(232, 69, 69, 0); }
+}
+
+/* —— 下拉选择 select —— */
+.demo-select {
+    position: relative;
+    display: inline-flex;
+    min-width: 140px;
+}
+
+.demo-select-trigger {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 14px;
+    font-size: 13.5px;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary, rgba(255, 255, 255, 0.5));
+    border: var(--border-glass);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    font-family: inherit;
+    transition:
+        background-color var(--time-normal) var(--easing-standard),
+        box-shadow var(--time-normal) var(--easing-standard),
+        transform var(--time-fast) var(--easing-elastic);
+}
+
+.demo-select-trigger:hover {
+    background-color: var(--bg-hover);
+}
+
+.demo-select-trigger:active {
+    transform: scale(0.9);
+}
+
+.demo-select.open .demo-select-trigger {
+    box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+.demo-select-value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.demo-select-arrow {
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid var(--text-muted, #888898);
+    border-bottom: 2px solid var(--text-muted, #888898);
+    transform: rotate(45deg) translate(-1px, -1px);
+    transition:
+        transform var(--time-fast) var(--easing-standard),
+        border-color var(--time-fast) var(--easing-standard);
+}
+
+.demo-select.open .demo-select-arrow {
+    transform: rotate(-135deg) translate(-1px, -1px);
+    border-color: var(--accent-color);
+}
+
+/* 挂在 .demo-select 内绝对定位（避开 html zoom 对 fixed 坐标的干扰），自带浮层令牌 */
+.demo-select-menu {
+    --accent-color: #5b6ee1;
+    --surface-menu: rgba(255, 255, 255, 0.68);
+    --border-popover: 1px solid rgba(255, 255, 255, 0.4);
+    --glass-elevated-filter: blur(20px) saturate(180%);
+    --text-primary: #333;
+    --text-muted: #888898;
+    --bg-hover: rgba(0, 0, 0, 0.05);
+    --radius-sm: 16px;
+    --radius-md: 24px;
+    --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    --easing-enter: cubic-bezier(0.2, 0.8, 0.4, 1);
+    --easing-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 100%;
+    z-index: 950;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px;
+    max-height: 240px;
+    overflow-y: auto;
+    background-color: var(--surface-menu);
+    border: var(--border-popover);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.96) translateY(-8px);
+    filter: blur(2px);
+    /* Chromium 在 opacity/transform 动画期间会丢弃 backdrop-filter，
+       收起态用恒等滤镜并与缩放同步插值，避免动画结束毛玻璃才突然出现 */
+    backdrop-filter: blur(0px) saturate(100%);
+    -webkit-backdrop-filter: blur(0px) saturate(100%);
+    transition:
+        opacity var(--time-normal) var(--easing-enter),
+        transform var(--time-normal) var(--easing-elastic),
+        filter var(--time-normal) var(--easing-enter),
+        backdrop-filter var(--time-normal) var(--easing-enter),
+        visibility var(--time-normal) var(--easing-enter);
+}
+
+.demo-select-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    filter: none;
+    backdrop-filter: var(--glass-elevated-filter);
+    -webkit-backdrop-filter: var(--glass-elevated-filter);
+}
+
+.demo-select-option {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 13.5px;
+    text-align: left;
+    color: var(--text-primary);
+    background-color: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: inherit;
+    transition:
+        background-color var(--time-fast) var(--easing-standard),
+        transform var(--time-fast) var(--easing-elastic);
+}
+
+.demo-select-option:hover {
+    background-color: var(--bg-hover);
+}
+
+.demo-select-option:active {
+    transform: scale(0.98);
+}
+
+/* 选中项右侧打勾标识，文字颜色不变 */
+.demo-select-option.active::after {
+    content: "";
+    flex-shrink: 0;
+    width: 5px;
+    height: 9px;
+    margin-left: auto;
+    border-right: 2px solid var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+    transform: rotate(45deg) translate(-1px, -1px);
+}
+
+/* —— 搜索结果浮层 settings-search-results —— */
+.demo-search-results {
+    --accent-color: #5b6ee1;
+    --surface-menu: rgba(255, 255, 255, 0.68);
+    --border-popover: 1px solid rgba(255, 255, 255, 0.4);
+    --glass-elevated-filter: blur(20px) saturate(180%);
+    --text-primary: #333;
+    --text-muted: #888898;
+    --bg-active: rgba(0, 0, 0, 0.1);
+    --text-on-accent: #ffffff;
+    --radius-sm: 16px;
+    --radius-pill: 9999px;
+    --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    --easing-enter: cubic-bezier(0.2, 0.8, 0.4, 1);
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 100%;
+    z-index: 950;
+    max-height: 60vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 6px;
+    background-color: var(--surface-menu);
+    border: var(--border-popover);
+    /* 胶囊轮廓 = 搜索框高度的一半（44px / 2） */
+    border-radius: 22px;
+    box-shadow: var(--shadow-xxl);
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+    transform-origin: top center;
+    visibility: hidden;
+    backdrop-filter: blur(0px) saturate(100%);
+    -webkit-backdrop-filter: blur(0px) saturate(100%);
+    transition:
+        opacity var(--time-normal) var(--easing-enter),
+        transform var(--time-normal) var(--easing-enter),
+        backdrop-filter var(--time-normal) var(--easing-enter),
+        visibility var(--time-normal);
+}
+
+.demo-search-results.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+    backdrop-filter: var(--glass-elevated-filter);
+    -webkit-backdrop-filter: var(--glass-elevated-filter);
+}
+
+.demo-search-result {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 9px 12px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color var(--time-fast) var(--easing-standard);
+}
+
+.demo-search-result:hover,
+.demo-search-result.active {
+    background-color: var(--bg-active);
+}
+
+.demo-search-result strong {
+    min-width: 0;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.demo-search-result span {
+    flex: 0 1 auto;
+    max-width: 45%;
+    overflow: hidden;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.demo-search-no-result {
+    padding: 20px 12px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* 定位后的目标项闪烁强调 */
+.demo-search-target {
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    background-color: var(--bg-secondary, rgba(255, 255, 255, 0.5));
+    border: var(--border-glass);
+    font-size: 13.5px;
+    color: var(--text-primary);
+    text-align: left;
+}
+
+.demo-search-target > * {
+    position: relative;
+    z-index: 1;
+}
+
+.demo-search-target.flash::before {
+    content: "";
+    position: absolute;
+    inset: 0 -10px;
+    z-index: 0;
+    border-radius: var(--radius-sm);
+    background-color: var(--accent-color);
+    pointer-events: none;
+    animation: demo-search-flash 2.4s ease-in-out;
+}
+
+.demo-search-target.flash::after {
+    content: attr(data-search-highlight);
+    position: absolute;
+    top: -12px;
+    right: 6px;
+    z-index: 3;
+    padding: 2px 10px;
+    border-radius: var(--radius-pill);
+    background-color: var(--accent-color);
+    color: var(--text-on-accent, #fff);
+    font-size: 12px;
+    line-height: 1.4;
+    pointer-events: none;
+    white-space: nowrap;
+    animation: demo-search-label 2.4s ease-out;
+}
+
+@keyframes demo-search-flash {
+    0%, 100% { opacity: 0; }
+    18%, 48%, 78% { opacity: 0.18; }
+    33%, 63% { opacity: 0; }
+}
+
+@keyframes demo-search-label {
+    0% { opacity: 0; transform: translateY(5px); }
+    14%, 72% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-5px); }
+}
+
+/* —— 字体预设 font-preset —— */
+.demo-fs-presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* 时钟字体预设：等宽网格，按钮整齐且更大 */
+.demo-fs-preset-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+    gap: 12px;
+    max-width: 420px;
+}
+
+.demo-fs-preset.clock {
+    font-size: 17px;
+    font-weight: 600;
+    padding: 12px 8px;
+    letter-spacing: -0.5px;
+    text-align: center;
+}
+
+.demo-fs-preset.clock.active {
+    font-weight: 700;
+}
+
+/* —— 配色预设 gradient-preset —— */
+.demo-gradient-presets {
+    display: grid;
+    gap: 10px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.demo-gradient-presets-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+}
+
+.demo-gradient-preset {
+    position: relative;
+    width: 100%;
+    height: 56px;
+    border: 2px solid color-mix(in srgb, var(--preset-edge) 40%, transparent);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition:
+        transform var(--time-fast) var(--easing-standard),
+        border-color var(--time-fast) var(--easing-standard);
+}
+
+/* 选中标记：右下角对勾，颜色取预设自身主题色，弹性出现 / 收起 */
+.demo-gradient-preset::after {
+    content: "";
+    position: absolute;
+    right: 9px;
+    bottom: 8px;
+    width: 5px;
+    height: 9px;
+    border-right: 2px solid var(--preset-edge);
+    border-bottom: 2px solid var(--preset-edge);
+    transform: rotate(45deg) scale(0);
+    opacity: 0;
+    transition:
+        transform var(--time-normal) var(--easing-elastic),
+        opacity var(--time-fast) var(--easing-standard);
+}
+
+.demo-gradient-preset.active::after {
+    transform: rotate(45deg) scale(1);
+    opacity: 1;
+}
+
+.demo-gradient-preset:hover {
+    transform: scale(1.1);
+    border-color: var(--preset-edge);
+}
+
+.demo-gradient-preset:active {
+    transform: scale(0.85);
+}
+
+.demo-gradient-preset.active {
+    border-color: var(--preset-edge);
+}
+
+/* —— 滑块数值可编辑 slider-value —— */
+.demo-slider-value {
+    min-width: 54px;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-secondary);
+    text-align: right;
+    cursor: text;
+    padding: 2px 6px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    user-select: none;
+    transition:
+        background-color var(--time-fast) var(--easing-standard),
+        border-color var(--time-fast) var(--easing-standard);
+}
+
+.demo-slider-value:hover {
+    background-color: var(--bg-hover);
+    border-color: var(--divider-color);
+}
+
+.demo-slider-value.editing {
+    min-width: 0;
+    width: 64px;
+    padding: 2px 6px;
+    outline: none;
+    background-color: var(--bg-hover);
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 18%, transparent);
+    user-select: text;
+}
 
 /* 侧边栏折叠状态（桌面：.collapsed 隐藏侧边栏，移动端由 .open 控制） */
 @media (min-width: 1100px) {
@@ -2219,52 +2375,4 @@
         padding-left: 0;
         padding-right: 0;
     }
-}
-
-/* =========================================
-   第七部分：dock 演示样式
-   ========================================= */
-.demo-dock {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px;
-    background: var(--bg-dock);
-    backdrop-filter: saturate(150%) blur(8px);
-    -webkit-backdrop-filter: saturate(150%) blur(8px);
-    border: var(--border-glass);
-    border-radius: var(--radius-pill);
-    box-shadow: var(--shadow-md);
-}
-
-.demo-dock .dock-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    background: var(--bg-button);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform var(--time-normal) cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.demo-dock .dock-btn svg {
-    width: 20px;
-    height: 20px;
-    color: var(--text-primary);
-}
-
-.demo-dock .dock-btn:hover {
-    transform: scale(1.08);
-}
-
-.demo-dock .dock-btn:active {
-    transform: scale(0.85);
-}
-
-.demo-dock.mobile-demo {
-    gap: 6px;
-    padding: 6px;
 }

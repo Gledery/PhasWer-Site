@@ -1071,7 +1071,8 @@ body.tool-page main {
   .tool-tile:hover,
   .org-card:hover,
   .org-card:hover .org-avatar,
-  .video-card:hover {
+  .video-card:hover,
+  .demo-gradient-preset:hover {
     transform: none !important;
   }
 }

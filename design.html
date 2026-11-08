@@ -555,6 +555,45 @@
 <span class="punc">}</span>
             </div>
         </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">通用操作按钮 action-btn <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">Frostart 设置面板中使用的通用操作按钮，标准样式为13.5px 字配 16px 图标。以下为它的标准样式和三种变体</p>
+            <div class="demo-stage fs-accent">
+                <button class="demo-action-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>检查更新</button>
+                <button class="demo-action-btn has-update"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>立即更新</button>
+                <button class="demo-action-btn accent-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>应用</button>
+                <button class="demo-action-btn danger-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>重置</button>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* 通用操作按钮 */</span><br>
+<span class="sel">.action-btn</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">display</span><span class="punc">:</span> <span class="val">flex</span><span class="punc">;</span> <span class="prop">align-items</span><span class="punc">:</span> <span class="val">center</span><span class="punc">;</span> <span class="prop">justify-content</span><span class="punc">:</span> <span class="val">center</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">gap</span><span class="punc">:</span> <span class="val">8px</span><span class="punc">;</span> <span class="prop">padding</span><span class="punc">:</span> <span class="val">10px 18px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-sm)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--bg-secondary)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">color</span><span class="punc">:</span> <span class="val">var(--text-secondary)</span><span class="punc">;</span> <span class="prop">font-size</span><span class="punc">:</span> <span class="val">13.5px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">var(--border-glass)</span><span class="punc">;</span> <span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-sm)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">cursor</span><span class="punc">:</span> <span class="val">pointer</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">transform .15s ease, background-color .15s ease, box-shadow .15s ease</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.action-btn svg</span> <span class="punc">{</span> <span class="prop">width</span><span class="punc">:</span> <span class="val">16px</span><span class="punc">;</span> <span class="prop">height</span><span class="punc">:</span> <span class="val">16px</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.action-btn:hover</span> <span class="punc">{</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--bg-hover)</span><span class="punc">;</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">var(--text-primary)</span><span class="punc">;</span> <span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-md)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.action-btn:active</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.85)</span><span class="punc">;</span> <span class="punc">}</span><br><br>
+<span class="comment">/* 危险按钮（重置/清除） */</span><br>
+<span class="sel">.action-btn.danger-btn</span> <span class="punc">{</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">#c93535</span><span class="punc">;</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">rgba(217, 69, 69, 0.08)</span><span class="punc">;</span> <span class="prop">border-color</span><span class="punc">:</span> <span class="val">rgba(217, 69, 69, 0.2)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.action-btn.danger-btn:hover</span> <span class="punc">{</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">rgba(217, 69, 69, 0.14)</span><span class="punc">;</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">#b52828</span><span class="punc">;</span> <span class="punc">}</span><br><br>
+<span class="comment">/* 主操作按钮（更新/应用） */</span><br>
+<span class="sel">.action-btn.accent-btn</span> <span class="punc">{</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">var(--accent-color)</span><span class="punc">;</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">color-mix(in srgb, var(--accent-color) 8%, transparent)</span><span class="punc">;</span> <span class="prop">border-color</span><span class="punc">:</span> <span class="val">color-mix(in srgb, var(--accent-color) 22%, transparent)</span><span class="punc">;</span> <span class="punc">}</span><br><br>
+<span class="comment">/* 有新版本：渐变背景 + 右上角脉冲红点 */</span><br>
+<span class="sel">.action-btn.has-update</span> <span class="punc">{</span> <span class="prop">position</span><span class="punc">:</span> <span class="val">relative</span><span class="punc">;</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">var(--accent-color)</span><span class="punc">;</span> <span class="prop">border-color</span><span class="punc">:</span> <span class="val">color-mix(in srgb, var(--accent-color) 35%, transparent)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.action-btn.has-update::after</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">content</span><span class="punc">:</span> <span class="val">''</span><span class="punc">;</span> <span class="prop">position</span><span class="punc">:</span> <span class="val">absolute</span><span class="punc">;</span> <span class="prop">top</span><span class="punc">:</span> <span class="val">7px</span><span class="punc">;</span> <span class="prop">right</span><span class="punc">:</span> <span class="val">7px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">width</span><span class="punc">:</span> <span class="val">8px</span><span class="punc">;</span> <span class="prop">height</span><span class="punc">:</span> <span class="val">8px</span><span class="punc">;</span> <span class="prop">border-radius</span><span class="punc">:</span> <span class="val">50%</span><span class="punc">;</span> <span class="prop">background</span><span class="punc">:</span> <span class="val">#e84545</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">0 0 0 2px var(--bg-secondary)</span><span class="punc">;</span> <span class="prop">animation</span><span class="punc">:</span> <span class="val">update-dot-pulse 2s ease-in-out infinite</span><span class="punc">;</span><br>
+<span class="punc">}</span>
+            </div>
+        </div>
     </div>
 
     <!-- =========================================
@@ -579,13 +618,15 @@
 <span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"option-btn"</span><span class="tag">&gt;</span>标准<span class="tag">&lt;/button&gt;</span><br><br>
 <span class="comment">/* CSS 实现 */</span><br>
 <span class="sel">.option-btn</span> <span class="punc">{</span><br>
-&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">12px 8px</span><span class="punc">;</span><br>
-&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">16px</span><span class="punc">;</span><br>
-&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">rgba(255, 255, 255, 0.5)</span><span class="punc">;</span><br>
-&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">var(--border-glass)</span><span class="punc">;</span><br>
-&nbsp;&nbsp;<span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-sm)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">display</span><span class="punc">:</span> <span class="val">flex</span><span class="punc">;</span> <span class="prop">flex-direction</span><span class="punc">:</span> <span class="val">row</span><span class="punc">;</span> <span class="prop">align-items</span><span class="punc">:</span> <span class="val">center</span><span class="punc">;</span> <span class="prop">justify-content</span><span class="punc">:</span> <span class="val">center</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">gap</span><span class="punc">:</span> <span class="val">6px</span><span class="punc">;</span> <span class="prop">padding</span><span class="punc">:</span> <span class="val">8px 14px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-sm)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--bg-secondary)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">var(--border-glass)</span><span class="punc">;</span> <span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-sm)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">font-size</span><span class="punc">:</span> <span class="val">12px</span><span class="punc">;</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">var(--text-secondary)</span><span class="punc">;</span><br>
 <span class="punc">}</span><br>
-<span class="sel">.option-btn.active</span> <span class="punc">{</span> <span class="prop">background</span><span class="punc">:</span> <span class="val">var(--bg-active)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.option-btn svg</span> <span class="punc">{</span> <span class="prop">width</span><span class="punc">:</span> <span class="val">20px</span><span class="punc">;</span> <span class="prop">height</span><span class="punc">:</span> <span class="val">20px</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.option-btn.active</span> <span class="punc">{</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--bg-active)</span><span class="punc">;</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">var(--text-primary)</span><span class="punc">;</span> <span class="punc">}</span><br>
 <span class="sel">.option-btn:hover</span> <span class="punc">{</span> <span class="prop">background</span><span class="punc">:</span> <span class="val">var(--bg-hover)</span><span class="punc">;</span> <span class="punc">}</span><br>
 <span class="sel">.option-btn:active</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.85)</span><span class="punc">;</span> <span class="punc">}</span><br><br>
 <span class="comment">/* 移动端适配：缩小尺寸，自动换行 */</span><br>
@@ -750,6 +791,35 @@
         </div>
 
         <div class="subsection">
+            <h3 class="subsection-title">滑块数值可编辑 slider-value <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">Frostart 滑块右侧的数值默认只读，点一下变成可输入，回车或失焦时按 min/max 夹取值再写回滑块。编辑态描一圈主题色光晕</p>
+            <div class="demo-stage fs-accent left" style="gap:16px;">
+                <div class="pw-slider-row" style="min-width:300px;">
+                    <span>透明度</span>
+                    <input type="range" class="pw-slider demo-slider-input" min="0" max="100" value="80">
+                    <span class="demo-slider-value" data-min="0" data-max="100">80</span>
+                    <span class="pw-unit">%</span>
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* 数值默认只读，点一下进入编辑态 */</span><br>
+<span class="sel">.slider-value</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">min-width</span><span class="punc">:</span> <span class="val">54px</span><span class="punc">;</span> <span class="prop">font-size</span><span class="punc">:</span> <span class="val">13px</span><span class="punc">;</span> <span class="prop">font-variant-numeric</span><span class="punc">:</span> <span class="val">tabular-nums</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">color</span><span class="punc">:</span> <span class="val">var(--text-secondary)</span><span class="punc">;</span> <span class="prop">text-align</span><span class="punc">:</span> <span class="val">right</span><span class="punc">;</span> <span class="prop">cursor</span><span class="punc">:</span> <span class="val">text</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">2px 6px</span><span class="punc">;</span> <span class="prop">border-radius</span><span class="punc">:</span> <span class="val">8px</span><span class="punc">;</span> <span class="prop">border</span><span class="punc">:</span> <span class="val">1px solid transparent</span><span class="punc">;</span> <span class="prop">user-select</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">background-color .15s var(--easing-standard), border-color .15s var(--easing-standard)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.slider-value:hover</span> <span class="punc">{</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--bg-hover)</span><span class="punc">;</span> <span class="prop">border-color</span><span class="punc">:</span> <span class="val">var(--divider-color)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.slider-value.editing</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">min-width</span><span class="punc">:</span> <span class="val">0</span><span class="punc">;</span> <span class="prop">width</span><span class="punc">:</span> <span class="val">64px</span><span class="punc">;</span> <span class="prop">outline</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span> <span class="prop">user-select</span><span class="punc">:</span> <span class="val">text</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--bg-hover)</span><span class="punc">;</span> <span class="prop">border</span><span class="punc">:</span> <span class="val">1px solid var(--accent-color)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">0 0 0 3px color-mix(in srgb, var(--accent-color) 18%, transparent)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br><br>
+<span class="comment">/* JS：点击转编辑，回车/失焦按 min/max 夹取后写回滑块 */</span>
+            </div>
+        </div>
+
+        <div class="subsection">
             <h3 class="subsection-title">分段选择 pw-segmented <span class="src-tag pw">PW</span></h3>
             <p class="subsection-desc">用来替代原生 select 的分段选择器，上面毛玻璃演示里的阴影选项就是用的这个</p>
             <div class="demo-stage">
@@ -810,6 +880,92 @@
 <span class="punc">}</span><br>
 <span class="sel">.accent-swatch:hover</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(1.12)</span><span class="punc">;</span> <span class="punc">}</span><br>
 <span class="sel">.accent-swatch.active</span> <span class="punc">{</span> <span class="prop">border-color</span><span class="punc">:</span> <span class="val">var(--text-primary)</span><span class="punc">;</span> <span class="punc">}</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">字体预设 font-preset <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">在 Frostart 中使用的字体和样式选择器</p>
+            <div class="demo-stage fs-accent col" style="align-items:flex-start; gap:20px;">
+                <div class="demo-fs-presets">
+                    <button class="demo-fs-preset active">思源黑体</button>
+                    <button class="demo-fs-preset">霞鹜文楷</button>
+                    <button class="demo-fs-preset">鸿蒙 OS</button>
+                    <button class="demo-fs-preset">系统默认</button>
+                </div>
+                <div class="demo-fs-preset-grid">
+                    <button class="demo-fs-preset clock active">12:34</button>
+                    <button class="demo-fs-preset clock">12:34</button>
+                    <button class="demo-fs-preset clock">12:34</button>
+                    <button class="demo-fs-preset clock">12:34</button>
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="sel">.font-presets</span> <span class="punc">{</span> <span class="prop">display</span><span class="punc">:</span> <span class="val">flex</span><span class="punc">;</span> <span class="prop">flex-wrap</span><span class="punc">:</span> <span class="val">wrap</span><span class="punc">;</span> <span class="prop">gap</span><span class="punc">:</span> <span class="val">8px</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="comment">/* 时钟字体预设：等宽网格，按钮整齐且更大 */</span><br>
+<span class="sel">.font-presets--grid</span> <span class="punc">{</span> <span class="prop">display</span><span class="punc">:</span> <span class="val">grid</span><span class="punc">;</span> <span class="prop">grid-template-columns</span><span class="punc">:</span> <span class="val">repeat(auto-fill, minmax(72px, 1fr))</span><span class="punc">;</span> <span class="prop">gap</span><span class="punc">:</span> <span class="val">12px</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.font-preset-btn</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">10px 16px</span><span class="punc">;</span> <span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-sm)</span><span class="punc">;</span> <span class="prop">font-size</span><span class="punc">:</span> <span class="val">14px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--bg-secondary)</span><span class="punc">;</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">var(--text-secondary)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">var(--border-glass)</span><span class="punc">;</span> <span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-sm)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">transform .15s ease, background-color .15s ease, color .15s ease, box-shadow .15s ease</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.font-preset-btn:hover</span> <span class="punc">{</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--bg-hover)</span><span class="punc">;</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">var(--text-primary)</span><span class="punc">;</span> <span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-md)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.font-preset-btn:active</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.85)</span><span class="punc">;</span> <span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-sm)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.font-preset-btn.active</span> <span class="punc">{</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--accent-color)</span><span class="punc">;</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">#fff</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.clock-font-preset-btn</span> <span class="punc">{</span> <span class="prop">font-size</span><span class="punc">:</span> <span class="val">17px</span><span class="punc">;</span> <span class="prop">font-weight</span><span class="punc">:</span> <span class="val">600</span><span class="punc">;</span> <span class="prop">padding</span><span class="punc">:</span> <span class="val">12px 8px</span><span class="punc">;</span> <span class="prop">letter-spacing</span><span class="punc">:</span> <span class="val">-0.5px</span><span class="punc">;</span> <span class="prop">text-align</span><span class="punc">:</span> <span class="val">center</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.clock-font-preset-btn.active</span> <span class="punc">{</span> <span class="prop">font-weight</span><span class="punc">:</span> <span class="val">700</span><span class="punc">;</span> <span class="punc">}</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">配色预设格 gradient-preset <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">Frostart 壁纸配色的预设格。边框和对勾的颜色都取预设自身主题色（--preset-edge），未选中时边框则保持 40% 透明</p>
+            <div class="demo-stage fs-accent">
+                <div class="demo-gradient-presets">
+                    <div class="demo-gradient-presets-row">
+                        <button class="demo-gradient-preset active" title="晨雾蓝" style="--preset-edge:#5f96f2; background:radial-gradient(circle at 53% 55%, rgba(95,150,242,.5) 0%, rgba(95,150,242,0) 65%),radial-gradient(circle at 47% 45%, rgba(90,147,226,.38) 0%, rgba(90,147,226,0) 65%),linear-gradient(135deg,#e8eef7,#dde6f5);"></button>
+                        <button class="demo-gradient-preset" title="青瓷绿" style="--preset-edge:#79d79d; background:radial-gradient(circle at 53% 55%, rgba(121,215,157,.5) 0%, rgba(121,215,157,0) 65%),radial-gradient(circle at 47% 45%, rgba(90,147,226,.38) 0%, rgba(90,147,226,0) 65%),linear-gradient(135deg,#e7efe9,#d6e6dc);"></button>
+                        <button class="demo-gradient-preset" title="暖砂" style="--preset-edge:#dea372; background:radial-gradient(circle at 53% 55%, rgba(222,163,114,.5) 0%, rgba(222,163,114,0) 65%),radial-gradient(circle at 47% 45%, rgba(90,147,226,.38) 0%, rgba(90,147,226,0) 65%),linear-gradient(135deg,#f3ece6,#e8dcd2);"></button>
+                        <button class="demo-gradient-preset" title="藕粉" style="--preset-edge:#d67ab9; background:radial-gradient(circle at 53% 55%, rgba(214,122,185,.5) 0%, rgba(214,122,185,0) 65%),radial-gradient(circle at 47% 45%, rgba(90,147,226,.38) 0%, rgba(90,147,226,0) 65%),linear-gradient(135deg,#f1e8ee,#e4d4df);"></button>
+                        <button class="demo-gradient-preset" title="米杏" style="--preset-edge:#dbb976; background:radial-gradient(circle at 53% 55%, rgba(219,185,118,.5) 0%, rgba(219,185,118,0) 65%),radial-gradient(circle at 47% 45%, rgba(213,183,123,.38) 0%, rgba(213,183,123,0) 65%),linear-gradient(135deg,#efece6,#e0d8c8);"></button>
+                        <button class="demo-gradient-preset" title="薰衣" style="--preset-edge:#9476db; background:radial-gradient(circle at 53% 55%, rgba(148,118,219,.5) 0%, rgba(148,118,219,0) 65%),radial-gradient(circle at 47% 45%, rgba(90,147,226,.38) 0%, rgba(90,147,226,0) 65%),linear-gradient(135deg,#edeaf2,#d8d2e6);"></button>
+                    </div>
+                    <div class="demo-gradient-presets-row">
+                        <button class="demo-gradient-preset active" title="晨雾蓝" style="--preset-edge:#2b5ed4; background:radial-gradient(circle at 53% 55%, rgba(43,94,212,.32) 0%, rgba(43,94,212,0) 65%),radial-gradient(circle at 47% 45%, rgba(56,97,199,.22) 0%, rgba(56,97,199,0) 65%),linear-gradient(135deg,#1e2433,#141b2b);"></button>
+                        <button class="demo-gradient-preset" title="青瓷绿" style="--preset-edge:#3fc08c; background:radial-gradient(circle at 53% 55%, rgba(63,192,140,.32) 0%, rgba(63,192,140,0) 65%),radial-gradient(circle at 47% 45%, rgba(68,187,122,.22) 0%, rgba(68,187,122,0) 65%),linear-gradient(135deg,#1b2620,#131d19);"></button>
+                        <button class="demo-gradient-preset" title="暖砂" style="--preset-edge:#bc6b43; background:radial-gradient(circle at 53% 55%, rgba(188,107,67,.32) 0%, rgba(188,107,67,0) 65%),radial-gradient(circle at 47% 45%, rgba(185,105,70,.22) 0%, rgba(185,105,70,0) 65%),linear-gradient(135deg,#2a2320,#1e1815);"></button>
+                        <button class="demo-gradient-preset" title="藕粉" style="--preset-edge:#b946a6; background:radial-gradient(circle at 53% 55%, rgba(185,70,166,.32) 0%, rgba(185,70,166,0) 65%),radial-gradient(circle at 47% 45%, rgba(185,70,156,.22) 0%, rgba(185,70,156,0) 65%),linear-gradient(135deg,#271f25,#1c161b);"></button>
+                        <button class="demo-gradient-preset" title="米杏" style="--preset-edge:#ba9845; background:radial-gradient(circle at 53% 55%, rgba(186,152,69,.32) 0%, rgba(186,152,69,0) 65%),radial-gradient(circle at 47% 45%, rgba(185,147,70,.22) 0%, rgba(185,147,70,0) 65%),linear-gradient(135deg,#26231d,#1a1813);"></button>
+                        <button class="demo-gradient-preset" title="薰衣" style="--preset-edge:#5e3cc3; background:radial-gradient(circle at 53% 55%, rgba(94,60,195,.32) 0%, rgba(94,60,195,0) 65%),radial-gradient(circle at 47% 45%, rgba(95,67,188,.22) 0%, rgba(95,67,188,0) 65%),linear-gradient(135deg,#221f2c,#171420);"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* 容器：上下两行（浅/深），每行 6 等分 */</span><br>
+<span class="sel">.gradient-presets</span> <span class="punc">{</span> <span class="prop">display</span><span class="punc">:</span> <span class="val">grid</span><span class="punc">;</span> <span class="prop">gap</span><span class="punc">:</span> <span class="val">10px</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.gradient-presets-row</span> <span class="punc">{</span> <span class="prop">display</span><span class="punc">:</span> <span class="val">grid</span><span class="punc">;</span> <span class="prop">grid-template-columns</span><span class="punc">:</span> <span class="val">repeat(6, 1fr)</span><span class="punc">;</span> <span class="prop">gap</span><span class="punc">:</span> <span class="val">10px</span><span class="punc">;</span> <span class="punc">}</span><br><br>
+<span class="comment">/* 预览背景由 JS 烘焙：双光斑 radial + 渐变底，
+   光斑 alpha 浅色 0.5/0.38、深色 0.32/0.22，--preset-edge 取 b2 */</span><br>
+<span class="comment">/* 配色预设格：边框与对勾都取预设自身主题色 --preset-edge */</span><br>
+<span class="sel">.gradient-preset</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">position</span><span class="punc">:</span> <span class="val">relative</span><span class="punc">;</span> <span class="prop">width</span><span class="punc">:</span> <span class="val">100%</span><span class="punc">;</span> <span class="prop">height</span><span class="punc">:</span> <span class="val">56px</span><span class="punc">;</span> <span class="prop">cursor</span><span class="punc">:</span> <span class="val">pointer</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">2px solid color-mix(in srgb, var(--preset-edge) 40%, transparent)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-sm)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">transform .15s var(--easing-standard), border-color .15s var(--easing-standard)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="comment">/* 选中标记：右下角对勾，弹性出现 / 收起 */</span><br>
+<span class="sel">.gradient-preset::after</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">content</span><span class="punc">:</span> <span class="val">""</span><span class="punc">;</span> <span class="prop">position</span><span class="punc">:</span> <span class="val">absolute</span><span class="punc">;</span> <span class="prop">right</span><span class="punc">:</span> <span class="val">9px</span><span class="punc">;</span> <span class="prop">bottom</span><span class="punc">:</span> <span class="val">8px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">width</span><span class="punc">:</span> <span class="val">5px</span><span class="punc">;</span> <span class="prop">height</span><span class="punc">:</span> <span class="val">9px</span><span class="punc">;</span> <span class="prop">border-right</span><span class="punc">:</span> <span class="val">2px solid var(--preset-edge)</span><span class="punc">;</span> <span class="prop">border-bottom</span><span class="punc">:</span> <span class="val">2px solid var(--preset-edge)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transform</span><span class="punc">:</span> <span class="val">rotate(45deg) scale(0)</span><span class="punc">;</span> <span class="prop">opacity</span><span class="punc">:</span> <span class="val">0</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">transform .3s var(--easing-elastic), opacity .15s var(--easing-standard)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.gradient-preset.active::after</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">rotate(45deg) scale(1)</span><span class="punc">;</span> <span class="prop">opacity</span><span class="punc">:</span> <span class="val">1</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.gradient-preset:hover</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(1.1)</span><span class="punc">;</span> <span class="prop">border-color</span><span class="punc">:</span> <span class="val">var(--preset-edge)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.gradient-preset:active</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.85)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="comment">/* 选中：边框全彩 + 右下角对勾，不再叠粗环 */</span><br>
+<span class="sel">.gradient-preset.active</span> <span class="punc">{</span> <span class="prop">border-color</span><span class="punc">:</span> <span class="val">var(--preset-edge)</span><span class="punc">;</span> <span class="punc">}</span>
             </div>
         </div>
 
@@ -962,6 +1118,47 @@
 &nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">background-color 0.15s ease</span><span class="punc">;</span><br>
 <span class="punc">}</span><br>
 <span class="sel">.text-input:focus</span> <span class="punc">{</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--bg-hover)</span><span class="punc">;</span> <span class="punc">}</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">下拉选择 select <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">用于替代原生 select 的自定义下拉的自定义毛玻璃Select。整体外观和Action-btn类似，展开时箭头翻转并描主题色光圈；主菜单挂在 body 下，同时使用 fixed 进行定位</p>
+            <div class="demo-stage fs-accent left">
+                <div class="demo-select" data-demo-select data-options="跟随系统,浅色,深色" data-value="0">
+                    <button type="button" class="demo-select-trigger"><span class="demo-select-value">跟随系统</span><span class="demo-select-arrow"></span></button>
+                </div>
+                <p class="control-hint">点一下展开，菜单会脱离容器挂到页面顶层</p>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="sel">.select</span> <span class="punc">{</span> <span class="prop">position</span><span class="punc">:</span> <span class="val">relative</span><span class="punc">;</span> <span class="prop">display</span><span class="punc">:</span> <span class="val">inline-flex</span><span class="punc">;</span> <span class="prop">min-width</span><span class="punc">:</span> <span class="val">140px</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.select-trigger</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">flex</span><span class="punc">:</span> <span class="val">1</span><span class="punc">;</span> <span class="prop">display</span><span class="punc">:</span> <span class="val">flex</span><span class="punc">;</span> <span class="prop">align-items</span><span class="punc">:</span> <span class="val">center</span><span class="punc">;</span> <span class="prop">justify-content</span><span class="punc">:</span> <span class="val">space-between</span><span class="punc">;</span> <span class="prop">gap</span><span class="punc">:</span> <span class="val">10px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">8px 14px</span><span class="punc">;</span> <span class="prop">font-size</span><span class="punc">:</span> <span class="val">13.5px</span><span class="punc">;</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">var(--text-primary)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--bg-secondary)</span><span class="punc">;</span> <span class="prop">border</span><span class="punc">:</span> <span class="val">var(--border-glass)</span><span class="punc">;</span> <span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-sm)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-sm)</span><span class="punc">;</span> <span class="prop">cursor</span><span class="punc">:</span> <span class="val">pointer</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">background-color .3s var(--easing-standard), box-shadow .3s var(--easing-standard), transform .15s var(--easing-elastic)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.select-trigger:hover</span> <span class="punc">{</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--bg-hover)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.select-trigger:active</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.9)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.select.open .select-trigger</span> <span class="punc">{</span> <span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">0 0 0 2px var(--accent-color)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.select-arrow</span> <span class="punc">{</span> <span class="prop">width</span><span class="punc">:</span> <span class="val">7px</span><span class="punc">;</span> <span class="prop">height</span><span class="punc">:</span> <span class="val">7px</span><span class="punc">;</span> <span class="prop">border-right</span><span class="punc">:</span> <span class="val">2px solid var(--text-muted)</span><span class="punc">;</span> <span class="prop">border-bottom</span><span class="punc">:</span> <span class="val">2px solid var(--text-muted)</span><span class="punc">;</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">rotate(45deg) translate(-1px,-1px)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.select.open .select-arrow</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">rotate(-135deg) translate(-1px,-1px)</span><span class="punc">;</span> <span class="prop">border-color</span><span class="punc">:</span> <span class="val">var(--accent-color)</span><span class="punc">;</span> <span class="punc">}</span><br><br>
+<span class="comment">/* 菜单挂到 body 下并写入 fixed 坐标，避免被祖先 overflow 裁掉 */</span><br>
+<span class="sel">.select-menu</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">position</span><span class="punc">:</span> <span class="val">fixed</span><span class="punc">;</span> <span class="prop">z-index</span><span class="punc">:</span> <span class="val">120</span><span class="punc">;</span> <span class="prop">display</span><span class="punc">:</span> <span class="val">flex</span><span class="punc">;</span> <span class="prop">flex-direction</span><span class="punc">:</span> <span class="val">column</span><span class="punc">;</span> <span class="prop">gap</span><span class="punc">:</span> <span class="val">4px</span><span class="punc">;</span> <span class="prop">padding</span><span class="punc">:</span> <span class="val">6px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">max-height</span><span class="punc">:</span> <span class="val">240px</span><span class="punc">;</span> <span class="prop">overflow-y</span><span class="punc">:</span> <span class="val">auto</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--surface-menu)</span><span class="punc">;</span> <span class="prop">border</span><span class="punc">:</span> <span class="val">var(--border-popover)</span><span class="punc">;</span> <span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-md)</span><span class="punc">;</span> <span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-lg)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">opacity</span><span class="punc">:</span> <span class="val">0</span><span class="punc">;</span> <span class="prop">visibility</span><span class="punc">:</span> <span class="val">hidden</span><span class="punc">;</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.96) translateY(-8px)</span><span class="punc">;</span> <span class="prop">filter</span><span class="punc">:</span> <span class="val">blur(2px)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">backdrop-filter</span><span class="punc">:</span> <span class="val">blur(0px) saturate(100%)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">opacity .3s var(--easing-enter), transform .3s var(--easing-elastic), filter .3s var(--easing-enter), backdrop-filter .3s var(--easing-enter)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.select-menu.open</span> <span class="punc">{</span> <span class="prop">opacity</span><span class="punc">:</span> <span class="val">1</span><span class="punc">;</span> <span class="prop">visibility</span><span class="punc">:</span> <span class="val">visible</span><span class="punc">;</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span> <span class="prop">filter</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span> <span class="prop">backdrop-filter</span><span class="punc">:</span> <span class="val">var(--glass-elevated-filter)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.select-option</span> <span class="punc">{</span> <span class="prop">display</span><span class="punc">:</span> <span class="val">flex</span><span class="punc">;</span> <span class="prop">align-items</span><span class="punc">:</span> <span class="val">center</span><span class="punc">;</span> <span class="prop">padding</span><span class="punc">:</span> <span class="val">8px 12px</span><span class="punc">;</span> <span class="prop">font-size</span><span class="punc">:</span> <span class="val">13.5px</span><span class="punc">;</span> <span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-sm)</span><span class="punc">;</span> <span class="prop">cursor</span><span class="punc">:</span> <span class="val">pointer</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.select-option:hover</span> <span class="punc">{</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--bg-hover)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.select-option:active</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.98)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="comment">/* 选中项右侧打勾，文字颜色不变 */</span><br>
+<span class="sel">.select-option.active::after</span> <span class="punc">{</span> <span class="prop">content</span><span class="punc">:</span> <span class="val">""</span><span class="punc">;</span> <span class="prop">width</span><span class="punc">:</span> <span class="val">5px</span><span class="punc">;</span> <span class="prop">height</span><span class="punc">:</span> <span class="val">9px</span><span class="punc">;</span> <span class="prop">margin-left</span><span class="punc">:</span> <span class="val">auto</span><span class="punc">;</span> <span class="prop">border-right</span><span class="punc">:</span> <span class="val">2px solid var(--accent-color)</span><span class="punc">;</span> <span class="prop">border-bottom</span><span class="punc">:</span> <span class="val">2px solid var(--accent-color)</span><span class="punc">;</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">rotate(45deg) translate(-1px,-1px)</span><span class="punc">;</span> <span class="punc">}</span>
             </div>
         </div>
     </div>
@@ -1193,6 +1390,42 @@
 <span class="sel">.context-item:hover</span> <span class="punc">{</span> <span class="prop">background</span><span class="punc">:</span> <span class="val">var(--bg-hover)</span><span class="punc">;</span> <span class="punc">}</span>
             </div>
         </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">搜索结果浮层 settings-search-results <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">Frostart 设置的搜索框的结果浮层。为了保证和输入框圆角一致，胶囊轮廓半径取搜索框高度的一半；与Select 一样挂在 body 下并且用 fixed 定位。点击结果会关闭浮层并让对应条目闪一下主题色，在右上角弹出定位标签。你可以试试在框里输入下面三个关键字中的一个</p>
+            <div class="demo-stage fs-accent col" style="align-items:stretch; gap:14px;">
+                <div class="demo-settings-search" style="max-width:320px;">
+                    <svg class="demo-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" class="demo-settings-search-input" placeholder="搜索设置项..." data-demo-search>
+                </div>
+                <div class="demo-search-target" data-search-highlight="壁纸">壁纸</div>
+                <div class="demo-search-target" data-search-highlight="引擎">AI 引擎</div>
+                <div class="demo-search-target" data-search-highlight="快捷键">快捷键</div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* 浮层挂到 body，胶囊半径 = 搜索框高度的一半 */</span><br>
+<span class="sel">.settings-search-results</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">position</span><span class="punc">:</span> <span class="val">fixed</span><span class="punc">;</span> <span class="prop">z-index</span><span class="punc">:</span> <span class="val">120</span><span class="punc">;</span> <span class="prop">max-height</span><span class="punc">:</span> <span class="val">60vh</span><span class="punc">;</span> <span class="prop">overflow-y</span><span class="punc">:</span> <span class="val">auto</span><span class="punc">;</span> <span class="prop">overscroll-behavior</span><span class="punc">:</span> <span class="val">contain</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">6px</span><span class="punc">;</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--surface-menu)</span><span class="punc">;</span> <span class="prop">border</span><span class="punc">:</span> <span class="val">var(--border-popover)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">calc(var(--settings-search-height) / 2)</span><span class="punc">;</span> <span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-xxl)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">opacity</span><span class="punc">:</span> <span class="val">0</span><span class="punc">;</span> <span class="prop">visibility</span><span class="punc">:</span> <span class="val">hidden</span><span class="punc">;</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">translateY(-6px) scale(0.98)</span><span class="punc">;</span> <span class="prop">transform-origin</span><span class="punc">:</span> <span class="val">top center</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">backdrop-filter</span><span class="punc">:</span> <span class="val">blur(0px) saturate(100%)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">opacity .3s var(--easing-enter), transform .3s var(--easing-enter), backdrop-filter .3s var(--easing-enter), visibility .3s</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.settings-search-results.show</span> <span class="punc">{</span> <span class="prop">opacity</span><span class="punc">:</span> <span class="val">1</span><span class="punc">;</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">translateY(0) scale(1)</span><span class="punc">;</span> <span class="prop">visibility</span><span class="punc">:</span> <span class="val">visible</span><span class="punc">;</span> <span class="prop">backdrop-filter</span><span class="punc">:</span> <span class="val">var(--glass-elevated-filter)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.settings-search-result</span> <span class="punc">{</span> <span class="prop">display</span><span class="punc">:</span> <span class="val">flex</span><span class="punc">;</span> <span class="prop">align-items</span><span class="punc">:</span> <span class="val">center</span><span class="punc">;</span> <span class="prop">justify-content</span><span class="punc">:</span> <span class="val">space-between</span><span class="punc">;</span> <span class="prop">gap</span><span class="punc">:</span> <span class="val">12px</span><span class="punc">;</span> <span class="prop">padding</span><span class="punc">:</span> <span class="val">9px 12px</span><span class="punc">;</span> <span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-sm)</span><span class="punc">;</span> <span class="prop">cursor</span><span class="punc">:</span> <span class="val">pointer</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.settings-search-result:hover, .settings-search-result.active</span> <span class="punc">{</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--bg-active)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.settings-search-result strong</span> <span class="punc">{</span> <span class="prop">font-size</span><span class="punc">:</span> <span class="val">14px</span><span class="punc">;</span> <span class="prop">font-weight</span><span class="punc">:</span> <span class="val">600</span><span class="punc">;</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">var(--text-primary)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.settings-search-result span</span> <span class="punc">{</span> <span class="prop">font-size</span><span class="punc">:</span> <span class="val">12px</span><span class="punc">;</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">var(--text-muted)</span><span class="punc">;</span> <span class="prop">max-width</span><span class="punc">:</span> <span class="val">45%</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.settings-search-no-result</span> <span class="punc">{</span> <span class="prop">padding</span><span class="punc">:</span> <span class="val">20px 12px</span><span class="punc">;</span> <span class="prop">text-align</span><span class="punc">:</span> <span class="val">center</span><span class="punc">;</span> <span class="prop">font-size</span><span class="punc">:</span> <span class="val">13px</span><span class="punc">;</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">var(--text-muted)</span><span class="punc">;</span> <span class="punc">}</span><br><br>
+<span class="comment">/* 定位强调：目标项闪烁 + 右上角标签 */</span><br>
+<span class="sel">.settings-search-target.flash::before</span> <span class="punc">{</span> <span class="prop">content</span><span class="punc">:</span> <span class="val">""</span><span class="punc">;</span> <span class="prop">position</span><span class="punc">:</span> <span class="val">absolute</span><span class="punc">;</span> <span class="prop">inset</span><span class="punc">:</span> <span class="val">0 -10px</span><span class="punc">;</span> <span class="prop">z-index</span><span class="punc">:</span> <span class="val">0</span><span class="punc">;</span> <span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-sm)</span><span class="punc">;</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--accent-color)</span><span class="punc">;</span> <span class="prop">pointer-events</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span> <span class="prop">animation</span><span class="punc">:</span> <span class="val">search-flash 2.4s ease-in-out</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.settings-search-target.flash::after</span> <span class="punc">{</span> <span class="prop">content</span><span class="punc">:</span> <span class="val">attr(data-search-highlight)</span><span class="punc">;</span> <span class="prop">position</span><span class="punc">:</span> <span class="val">absolute</span><span class="punc">;</span> <span class="prop">top</span><span class="punc">:</span> <span class="val">-12px</span><span class="punc">;</span> <span class="prop">right</span><span class="punc">:</span> <span class="val">6px</span><span class="punc">;</span> <span class="prop">z-index</span><span class="punc">:</span> <span class="val">3</span><span class="punc">;</span> <span class="prop">padding</span><span class="punc">:</span> <span class="val">2px 10px</span><span class="punc">;</span> <span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-pill)</span><span class="punc">;</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--accent-color)</span><span class="punc">;</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">var(--text-on-accent)</span><span class="punc">;</span> <span class="prop">font-size</span><span class="punc">:</span> <span class="val">12px</span><span class="punc">;</span> <span class="prop">animation</span><span class="punc">:</span> <span class="val">search-label 2.4s ease-out</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">@keyframes search-flash</span> <span class="punc">{</span> <span class="val">0%,100%{opacity:0} 18%,48%,78%{opacity:.18} 33%,63%{opacity:0}</span> <span class="punc">}</span><br>
+<span class="sel">@keyframes search-label</span> <span class="punc">{</span> <span class="val">0%{opacity:0;transform:translateY(5px)} 14%,72%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(-5px)}</span> <span class="punc">}</span>
+            </div>
+        </div>
     </div>
 
     <!-- 设计令牌总览 -->
@@ -1240,6 +1473,19 @@
                     <tr><td><code>--content-max-width</code></td><td>1300px</td></tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">图标描边 .icon <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">Frostart 的线性图标统一用一个 --icon-stroke 令牌控制描边粗细（默认 2）。描边属性写在宿主 svg 上，能继承进 use 影子树，改这一处全站图标粗细随之变化</p>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="sel">:root</span> <span class="punc">{</span> <span class="prop">--icon-stroke</span><span class="punc">:</span> <span class="val">2</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="comment">/* 描边属性设在宿主 svg 上，可继承进 use 影子树 */</span><br>
+<span class="sel">.icon</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">fill</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span> <span class="prop">stroke</span><span class="punc">:</span> <span class="val">currentColor</span><span class="punc">;</span> <span class="prop">stroke-width</span><span class="punc">:</span> <span class="val">var(--icon-stroke)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">stroke-linecap</span><span class="punc">:</span> <span class="val">round</span><span class="punc">;</span> <span class="prop">stroke-linejoin</span><span class="punc">:</span> <span class="val">round</span><span class="punc">;</span> <span class="prop">flex-shrink</span><span class="punc">:</span> <span class="val">0</span><span class="punc">;</span><br>
+<span class="punc">}</span>
+            </div>
         </div>
     </div>
 

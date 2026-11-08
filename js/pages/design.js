@@ -476,6 +476,132 @@ window.resetGlassDemo = function () {
                 if (!ctxDemoArea.contains(e.target)) ctxMenu.classList.remove('show');
             });
         }
+
+        // 下拉选择 select：菜单挂在 .demo-select 内，绝对定位
+        document.querySelectorAll('[data-demo-select]').forEach(function (sel) {
+            var trigger = sel.querySelector('.demo-select-trigger');
+            var valueEl = sel.querySelector('.demo-select-value');
+            var options = (sel.getAttribute('data-options') || '').split(',');
+            var current = parseInt(sel.getAttribute('data-value') || '0', 10);
+            var menu = document.createElement('div');
+            menu.className = 'demo-select-menu';
+            options.forEach(function (label, i) {
+                var b = document.createElement('button');
+                b.type = 'button';
+                b.className = 'demo-select-option' + (i === current ? ' active' : '');
+                b.textContent = label;
+                b.addEventListener('click', function () {
+                    current = i;
+                    valueEl.textContent = label;
+                    menu.querySelectorAll('.demo-select-option').forEach(function (o) { o.classList.remove('active'); });
+                    b.classList.add('active');
+                    closeMenu();
+                });
+                menu.appendChild(b);
+            });
+            sel.appendChild(menu);
+
+            function openMenu() { sel.classList.add('open'); menu.classList.add('open'); }
+            function closeMenu() { sel.classList.remove('open'); menu.classList.remove('open'); }
+
+            trigger.addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (menu.classList.contains('open')) closeMenu(); else openMenu();
+            });
+            document.addEventListener('click', function (e) {
+                if (!sel.contains(e.target)) closeMenu();
+            });
+        });
+
+        // 滑块数值可编辑 slider-value：点击转编辑，回车/失焦按 min/max 夹取后写回滑块
+        document.querySelectorAll('.demo-slider-value').forEach(function (valEl) {
+            var row = valEl.closest('.pw-slider-row');
+            var input = row ? row.querySelector('.demo-slider-input') : null;
+            var min = parseInt(valEl.getAttribute('data-min') || '0', 10);
+            var max = parseInt(valEl.getAttribute('data-max') || '100', 10);
+            if (input) input.addEventListener('input', function () { valEl.textContent = input.value; });
+
+            valEl.addEventListener('click', function () {
+                if (valEl.classList.contains('editing')) return;
+                valEl.classList.add('editing');
+                valEl.setAttribute('contenteditable', 'true');
+                valEl.textContent = '';
+                valEl.focus();
+                var range = document.createRange();
+                range.selectNodeContents(valEl);
+                var s = window.getSelection();
+                s.removeAllRanges();
+                s.addRange(range);
+            });
+
+            function commit() {
+                var n = parseInt(valEl.textContent, 10);
+                if (isNaN(n)) n = input ? parseInt(input.value, 10) : min;
+                n = Math.max(min, Math.min(max, n));
+                if (input) input.value = n;
+                valEl.textContent = n;
+                valEl.classList.remove('editing');
+                valEl.removeAttribute('contenteditable');
+            }
+
+            valEl.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') { e.preventDefault(); valEl.blur(); }
+                if (e.key === 'Escape') { valEl.textContent = input ? input.value : min; valEl.blur(); }
+            });
+            valEl.addEventListener('blur', function () { if (valEl.classList.contains('editing')) commit(); });
+        });
+
+        // 搜索结果浮层：联想列表挂在搜索框内绝对定位，点结果关闭并让目标条目闪烁定位
+        document.querySelectorAll('[data-demo-search]').forEach(function (input) {
+            var box = input.closest('.demo-settings-search');
+            var stage = input.closest('.demo-stage');
+            var targets = stage ? Array.prototype.slice.call(stage.querySelectorAll('.demo-search-target')) : [];
+            var panel = document.createElement('div');
+            panel.className = 'demo-search-results';
+            (box || input.parentNode).appendChild(panel);
+
+            function filter(q) {
+                return targets.filter(function (t) { return t.textContent.indexOf(q) !== -1; });
+            }
+            function render(list) {
+                panel.innerHTML = '';
+                if (!list.length) {
+                    var empty = document.createElement('div');
+                    empty.className = 'demo-search-no-result';
+                    empty.textContent = '没有匹配的设置项';
+                    panel.appendChild(empty);
+                    return;
+                }
+                list.forEach(function (t) {
+                    var b = document.createElement('button');
+                    b.type = 'button';
+                    b.className = 'demo-search-result';
+                    b.innerHTML = '<strong></strong><span></span>';
+                    b.querySelector('strong').textContent = t.textContent;
+                    b.querySelector('span').textContent = t.getAttribute('data-search-highlight') || '';
+                    b.addEventListener('click', function () {
+                        closePanel();
+                        t.classList.remove('flash');
+                        void t.offsetWidth;
+                        t.classList.add('flash');
+                        setTimeout(function () { t.classList.remove('flash'); }, 2400);
+                    });
+                    panel.appendChild(b);
+                });
+            }
+            function openPanel() { panel.classList.add('show'); }
+            function closePanel() { panel.classList.remove('show'); }
+
+            input.addEventListener('input', function () {
+                var q = input.value.trim();
+                if (!q) { closePanel(); return; }
+                render(filter(q));
+                openPanel();
+            });
+            document.addEventListener('click', function (e) {
+                if (!panel.contains(e.target) && e.target !== input) closePanel();
+            });
+        });
     }
 
     if (document.readyState === 'loading') {
