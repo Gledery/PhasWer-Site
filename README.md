@@ -1,14 +1,35 @@
-# PhasWer 的小站
+<p align="center">
+  <img src="img/Phas-Wer-Dark.png" width="280" alt="PhasWer Logo">
+</p>
+
+<h1 align="center">PhasWer 的小站</h1>
+
+<p align="center">
+  <a href="https://phaswer.pages.dev/"><img src="https://img.shields.io/badge/在线预览-phaswer.pages.dev-%230969da"></a>
+  <a href="https://phaswer.pages.dev/changelog"><img src="https://img.shields.io/badge/更新日志-版本时间线-%23a855f7"></a>
+  <a href="https://phaswer.pages.dev/design"><img src="https://img.shields.io/badge/设计语言-毛玻璃视觉规范-%23f0b429"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-GPL--3.0-%23808080"></a>
+</p>
 
 ## 这是什么
 
 **PhasWer 的小站** 是一个为 PhasWer 工作室制作的小站~
 
+除此之外，这个小站也是灰鸢学习编程的起点，第一次上线竟然已经是2025年的3月21号了！到今天也是各种奇思妙想的实验田，所以也变得越来越有意思和丰富
+
+整体的设计语言和 [Frostart 新标签页](https://github.com/Gledery/frostart) 是一样的，包括毛玻璃、动态光斑、角落 Kaomoji等等等等...两边一直在互相搬来搬去
+
+## 体验
+
+ [phaswer.pages.dev](https://phaswer.pages.dev/) 
+
+> [!NOTE]
+> 数据看板是加密页面哦，相应的，这是全站唯一一个不适用于 GPLv3 协议的页面，谢绝复制
+
 ## 功能列表
 
-写在这里主要是备忘，可能会有更新不及时的地方
-
 ### 首页
+
 - 社区成员介绍（含 B 站主页跳转）
 - 友情链接卡片
 - 代表作画廊（桌面端支持滚轮操控，按发布时间排序）
@@ -16,6 +37,7 @@
 - 底部版本号从 changelog 动态提取
 
 ### 子页面
+
 - **更新日志**：带侧边栏导航的版本时间线
 - **数据看板**：灰鸢的 B 站账号数据追踪，AES-256-GCM 加密，需密码查看，趋势图支持起止节点选择
 - **设计语言**：全站视觉规范手记
@@ -23,10 +45,12 @@
 - **提词器**：在线提词器
 - **图片处理工具**：图片压缩（自适应模式 / AVIF / PNG 量化 / EXIF 保留）+ 批量水印，支持 HEIC/HEIF、TIFF 输入，可 ZIP 批量打包
 - **数据加密工具**：生成 data-all.js 用的加密工具（PBKDF2 + AES-256-GCM）
+- **Upers.io**：Florr.io 游戏社区与公会页，带成员列表和玩家数据
 
 ### 全局
+
 - 毛玻璃设计语言，动态光斑壁纸层
-- 入场动画 + 滚动触发动画（IntersectionObserver，老旧内核自动回退），遵守 `prefers-reduced-motion`
+- 入场动画使用纯 CSS `@starting-style`，滚动触发动画由 IntersectionObserver 驱动（老旧内核自动回退），遵守 `prefers-reduced-motion`
 - 统一的 `pw-segmented` 分段选择器组件，跨页面复用
 - 移动端适配
 
@@ -42,10 +66,17 @@
 
 ---
 
+## 本地运行
+
+纯静态站点，双击 `index.html` 就能看。想要完整体验（尤其是加密相关页面）可以用任意工具起个本地服务器
+
+> [!NOTE]
+> 数据看板和加密工具依赖 Web Crypto API，只在 HTTPS 或 localhost 下可用，`file://` 直接打开会失败
+
 ## 项目结构
 
 ```
-PhaswerWebSource/
+PhasWer-Site/
 ├── css/                        # 所有样式
 │   ├── core.css                # 全局：设计令牌、布局、动画、玻璃态、dock、Kaomoji
 │   ├── 404.css
@@ -57,7 +88,7 @@ PhaswerWebSource/
 │   ├── index.css
 │   ├── teleprompter.css
 │   ├── upio.css
-│   └── image-tools.css           # 图片处理工具（压缩 + 水印）
+│   └── image-tools.css         # 图片处理工具（压缩 + 水印）
 │
 ├── js/
 │   ├── common.js               # 全局：scrollToTop、入场动画、光斑、角落 Kaomoji
@@ -77,12 +108,13 @@ PhaswerWebSource/
 │       ├── index.js
 │       ├── teleprompter.js
 │       ├── upio.js
-│       └── image-tools.js        # 图片处理工具（压缩 + 水印）
+│       └── image-tools.js      # 图片处理工具（压缩 + 水印）
 │
 ├── img/                        # 图片资源
 │   ├── avatar/                 # 成员头像
 │   ├── dock-icon/              # dock 栏 SVG 图标
-│   └── video-cover/            # 视频封面
+│   ├── video-cover/            # 视频封面
+│   └── ...                     # 站徽、作品封面、Frostart 图标等零散图片
 │
 ├── index.html                  # 首页
 ├── changelog.html              # 更新日志
@@ -91,9 +123,11 @@ PhaswerWebSource/
 ├── encrypt-tool.html           # 加密工具（生成 data-all.js）
 ├── history.html                # 历史年表
 ├── teleprompter.html           # 提词器
-├── upio.html                   # UPIO 页面
+├── upio.html                   # Upers.io 社区页
 ├── image-tools.html            # 图片处理工具（压缩 + 水印）
 ├── 404.html                    # 错误页
+├── AGENTS.md                   # 给 AI Agent 看的开发规范
+├── LICENSE                     # GPL-3.0
 └── favicon.png
 ```
 
@@ -101,20 +135,20 @@ PhaswerWebSource/
 
 ## 技术栈
 
-原生 HTML / CSS / JS，CSS Custom Properties + `backdrop-filter`，Web Crypto API（加密），Canvas（图片处理），外加 heic2any / UTIF.js / JSZip / imagequant / oxipng 等按需懒加载的第三方库。
+原生 HTML / CSS / JS，CSS Custom Properties + `backdrop-filter`，Web Crypto API（加密），Canvas（图片处理），外加 heic2any / UTIF.js / JSZip / imagequant / oxipng 等按需懒加载的第三方库
 
-之所以不上框架，一是站点就这么大没必要，二是想保持代码可直接阅读，这样想抄哪段直接拿走就行（只要遵守 GPL-3.0 协议都欢迎）。
+之所以不上框架，一是站点就这么大没必要，二是想保持代码可直接阅读，这样想抄哪段直接拿走就行（只要遵守 GPL-3.0 协议都欢迎）
 
 ### 浏览器兼容性
 
 面向现代浏览器，没有做刻意的老旧内核兼容。依赖到的关键 API：
 
-- `backdrop-filter`、CSS Custom Properties、`aspect-ratio`、`text-wrap: balance`
+- `backdrop-filter`、CSS Custom Properties、`aspect-ratio`、`text-wrap: balance`、`@starting-style`
 - Web Crypto API（`crypto.subtle`，需 HTTPS 或 localhost）
 - `IntersectionObserver`（无此 API 时滚动入场动画自动回退到 scroll + resize 监听）
 - `<input type="file">` 的 HEIC/HEIF、TIFF 解码依赖 heic2any / UTIF.js 懒加载
 
-IE 一律不支持，建议 Chrome / Edge / Firefox / Safari 较新版本。
+IE 一律不支持，建议 Chrome / Edge / Firefox / Safari 较新版本
 
 ---
 
@@ -158,7 +192,7 @@ IE 一律不支持，建议 Chrome / Edge / Firefox / Safari 较新版本。
 | 渐变 | `--gradient-page` `--gradient-wallpaper` | 页面底色与壁纸层底色 |
 | 布局 | `--header-height` `--content-max-width` | 顶部栏高度与内容最大宽度（1300px） |
 
-想改全站风格只要动这里。设计语言页 (`design.html`) 的令牌总览表格即按此自动同步。
+想改全站风格只要动这里。设计语言页（`design.html`）的令牌总览表格即按此自动同步
 
 ---
 
@@ -173,11 +207,14 @@ IE 一律不支持，建议 Chrome / Edge / Firefox / Safari 较新版本。
 
 加密用的工具是 `encrypt-tool.html`，把 CSV 文本粘进去输密码就能生成 `data-all.js`
 
+> [!WARNING]
+> 这套参数和已存历史数据绑死，改任何一个都会导致旧密文解不开，动加密逻辑前先确认兼容性
+
 ---
 
 ## 致谢
 
-虽然这个站真的很小，但站在这些好东西的肩膀上。所有第三方库都按需懒加载
+虽然这个站真的很小，但站在这些好东西的肩膀上
 
 | 库 | 版本 | 应用 |
 | --- | --- | --- |
@@ -192,6 +229,10 @@ IE 一律不支持，建议 Chrome / Edge / Firefox / Safari 较新版本。
 以上第三方库全部按需懒加载
 
 ---
+
+## 贡献与联系
+
+非常欢迎报 bug、提建议或直接贡献代码，可以开 [GitHub Issue](https://github.com/Gledery/PhasWer-Site/issues)，或者直接 [B 站私信](https://space.bilibili.com/3461577804089941) 找我
 
 
 ## 协议
