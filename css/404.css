@@ -1,0 +1,53 @@
+.error-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    width: 90%;
+    max-width: 1000px;
+    padding: 200px 100px;
+    border-radius: var(--radius-xl);
+    background: var(--bg-card);
+    backdrop-filter: saturate(150%) blur(8px);
+    -webkit-backdrop-filter: saturate(150%) blur(8px);
+    border: var(--border-glass);
+    box-shadow: var(--shadow-xxl);
+    text-align: center;
+}
+
+.error-code {
+    font-size: 120px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    opacity: 0.3;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.error-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 15px;
+}
+
+.error-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin: 0 0 40px;
+}
+
+.error-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media (max-width: 540px) {
+    .error-card { padding: 40px 30px; }
+    .error-code { font-size: 80px; }
+    .error-title { font-size: 22px; }
+}

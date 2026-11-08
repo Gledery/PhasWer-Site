@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据加密工具 | PhasWer 的小站</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/encrypt-tool.css">
+</head>
+<body class="tool-page">
+<script src="js/layout.js"></script>
+
+<header role="banner">
+    <div class="logo-group">
+        <a href="index.html"><img src="img/Phas-Wer-Dark.png" alt="PhasWer Logo"></a>
+    </div>
+</header>
+
+<main>
+    <div class="tool-container">
+        <h2 class="tool-title">数据加密工具</h2>
+
+        <div class="section">
+            <div class="section-title">输入 CSV 数据</div>
+            <p class="note-inline">所有的计算都在本地完成，密码和明文不会离开你的设备~</p>
+            <label>粘贴 CSV 文本（含表头）：</label>
+            <textarea id="csvInput" placeholder="时间,播放量,累计粉丝,点赞,收藏,硬币,评论,弹幕,分享&#10;2025/8/16,77455,248,2177,584,446,487,67,55&#10;2025/8/17,77492,251,2211,583,446,487,67,55&#10;..."></textarea>
+            <div class="drop-zone" id="dropZone">
+                <span id="dropText">或将 CSV 文件拖放到此处 / 点击选择文件</span>
+                <input type="file" id="fileInput" accept=".csv,.txt">
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">设置密码</div>
+            <div class="password-row">
+                <div>
+                    <label>加密密码：</label>
+                    <input type="password" id="encryptPassword" placeholder="输入加密密码">
+                </div>
+                <div>
+                    <label>确认密码：</label>
+                    <input type="password" id="confirmPassword" placeholder="再次输入密码">
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="primary" onclick="doEncrypt()">加密并生成</button>
+        </div>
+        <div class="status" id="status"></div>
+
+        <div class="section output-section hidden" id="outputCard">
+            <div class="section-title">加密结果</div>
+            <label>加密后的数据：</label>
+            <textarea id="output" readonly></textarea>
+            <div class="actions" style="margin-top:16px">
+                <button onclick="copyOutput()">复制到剪贴板</button>
+                <button onclick="downloadOutput()">下载 data-all.js</button>
+            </div>
+            <div class="verify-row">
+                <div>
+                    <label>验证解密：输入刚才的密码来验证</label>
+                    <input type="password" id="verifyPassword" placeholder="输入密码验证">
+                </div>
+                <button onclick="doVerify()">验证</button>
+            </div>
+            <div class="status" id="verifyStatus"></div>
+        </div>
+
+        <div class="doc-section">
+            <h3>输入 / 输出格式</h3>
+            <p><strong>输入</strong> — 标准 CSV 文本，首行为表头，后续每行一条数据，UTF-8 编码。</p>
+            <div class="code-block"><span class="comment">// 输入示例</span>
+<span class="key">时间,播放量,累计粉丝,点赞,收藏,硬币,评论,弹幕,分享</span>
+2025/8/16,77455,248,2177,584,446,487,67,55
+2025/8/17,77492,251,2211,583,446,487,67,55</div>
+            <p><strong>输出</strong> — 下载生成的 <code>data-all.js</code>，替换 <code>js/data/data-all.js</code> 即可。密文格式为 <code>salt:iv:ciphertext</code>（三段 Base64）。</p>
+            <div class="code-block"><span class="comment">// 输出示例</span>
+<span class="str">a3JhbmRvbXNhbHQ6aXZ2ZWN0b3I6ZW5jcnlwdGVkZGF0YQ==</span></div>
+        </div>
+
+        <div class="doc-section">
+            <h3>加密方案</h3>
+            <div class="doc-subsection">
+                <h4>PBKDF2 密钥派生</h4>
+                <p>用户密码不是直接用于加密。它首先通过 PBKDF2-HMAC-SHA256 算法，配合 16 字节随机盐值，经过迭代派生为 256 位 AES 密钥。盐值每次加密随机生成，因此相同密码的派生密钥每次都不同。</p>
+            </div>
+            <div class="doc-subsection">
+                <h4>AES-256-GCM 加密</h4>
+                <p>使用派生密钥和 12 字节随机 IV 对明文进行 AES-GCM 加密。GCM（Galois/Counter Mode）是认证加密模式，解密时会自动验证密文完整性——如果密文被篡改或密码错误，解密操作直接抛出异常。</p>
+            </div>
+            <div class="doc-subsection">
+                <h4>输出结构</h4>
+                <p>最终输出将 Salt、IV、Ciphertext 分别 Base64 编码后用冒号连接：<code>Base64(Salt):Base64(IV):Base64(Ciphertext)</code>。解密时按同样顺序拆分即可。全程使用浏览器原生 <code>crypto.subtle</code> API，无任何第三方依赖。</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="js/common.js"></script>
+<script src="js/crypto.js"></script>
+<script src="js/pages/encrypt-tool.js"></script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+/* 页面特定样式 */
+main {
+    padding: 0;
+}
+.card-transparent {
+  margin-top: 0;
+}
+/* =========================================
+历史表格
+========================================= */
+      .table-wrapper {
+margin-top: 40px;
+padding: 20px;
+border-radius: var(--radius-xl);
+border: var(--border-glass);
+box-shadow: var(--shadow-xxl);
+background: var(--bg-card);
+      }
+
+      .history-table {
+width: 100%;
+table-layout: fixed;
+border-collapse: collapse;
+font-size: 15px;
+color: var(--color-text);
+line-height: 1.8;
+text-align: left;
+border: none;
+      }
+
+      .history-table thead th {
+padding: 15px 20px;
+font-weight: 600;
+      }
+
+      .history-table td {
+padding: 0;
+vertical-align: top;
+      }
+
+      .event-time {
+font-size: 14px;
+font-weight: 600;
+      }
+
+      .event-desc {
+font-size: 16px;
+      }
+
+      .event-cell {
+padding: 15px;
+margin-top: 5px;
+margin-bottom: 5px;
+min-height: 40px;
+border-radius: 30px;
+transition: transform var(--time-normal) ease, background-color var(--time-normal) ease;
+cursor: pointer;
+border: var(--border-glass);
+      }
+
+      .org-col .event-cell {
+background: color-mix(in srgb, var(--color-org) 10%, transparent);
+box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      }
+
+      .gld-col .event-cell {
+background: color-mix(in srgb, var(--color-gld) 10%, transparent);
+box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      }
+
+      .ldc-col .event-cell {
+background: color-mix(in srgb, var(--color-ldc) 10%, transparent);
+box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      }
+
+      .event-cell:hover {
+transform: translateY(-5px);
+      }
+
+      .event-cell:active {
+transform: scale(0.9);
+      }
+
+      .year-col {
+width: 80px;
+text-align: center;
+font-weight: 600;
+font-size: 18px;
+      }
+
+      .empty-cell {
+background: transparent;
+      }
+
+      /* 响应式 */
+      @media (max-width: 768px) {
+.table-wrapper { padding: 15px; margin-top: 30px; }
+.history-table { font-size: 13px; }
+.history-table thead th { padding: 12px 15px; font-size: 14px; }
+.event-cell { padding: 12px; border-radius: 20px; }
+.event-time { font-size: 12px; }
+.event-desc { font-size: 14px; }
+.year-col { width: 60px; font-size: 16px; }
+      }
+
+      @media (max-width: 540px) {
+.table-wrapper { padding: 10px; margin-top: 20px; overflow-x: auto; }
+.history-table { font-size: 12px; min-width: 500px; }
+.history-table thead th { padding: 10px 12px; font-size: 13px; }
+.event-cell { padding: 10px; border-radius: 16px; }
+.event-time { font-size: 11px; }
+.event-desc { font-size: 13px; }
+.year-col { width: 50px; font-size: 14px; }
+      }
+
+      /* 工具栏 */
+      .history-toolbar {
+  text-align: center;
+  padding: 0 20px;
+      }
+
+      .stats-line {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  line-height: 1.8;
+      }
+
+      .toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+      }
+
+      .search-input {
+  padding: 10px 20px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.4);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  width: 220px;
+  color: var(--text-primary);
+  transition: border-color var(--time-fast) ease;
+      }
+
+      .search-input:focus {
+  border-color: rgba(162, 206, 255, 0.6);
+      }
+
+      .search-input::placeholder {
+  color: #999;
+      }
+
+      .event-cell.highlighted {
+  box-shadow: 0 0 0 2px rgba(162, 206, 255, 0.7), 0 8px 20px rgba(0,0,0,0.1);
+      }
+
+      .event-cell.dimmed {
+  opacity: 0.2;
+      }
+
+      .event-cell {
+  transition: transform var(--time-normal) ease, background-color var(--time-normal) ease, box-shadow var(--time-normal) ease, opacity var(--time-normal) ease;
+      }
+
+      .year-col.dimmed {
+  opacity: 0.2;
+      }
+
+      .year-col {
+  transition: opacity var(--time-normal) ease;
+      }
+
+      .empty-cell.dimmed {
+  opacity: 0.2;
+      }
+
+      .empty-cell {
+  transition: opacity var(--time-normal) ease;
+      }
+
+      @media (max-width: 540px) {
+  .history-toolbar { padding: 0 10px; }
+  .search-input { width: 100%; font-size: 13px; }
+  .toolbar-actions { flex-direction: column; }
+  .stats-line { font-size: 12px; }
+      }

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>图片处理工具 | PhasWer 的小站</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/image-tools.css">
+</head>
+<body class="tool-page">
+<script src="js/layout.js"></script>
+<header>
+    <div class="logo-group">
+        <img src="img/Phas-Wer-Dark.png" alt="PhasWer Logo">
+    </div>
+</header>
+
+<main>
+    <div class="tool-container">
+        <h2 class="tool-title">图片处理工具</h2>
+        <p class="tool-subtitle">一个纯本地的图片压缩和水印工具~</p>
+
+        <div class="upload-section">
+            <div class="upload-box" id="imagesUpload">
+                <input type="file" id="imagesInput" accept="image/*,.heic,.heif,.tif,.tiff" multiple>
+                <h3><img src="img/dock-icon/add_photo_alternate_64dp.svg" alt="" class="title-icon"> <span id="imagesUploadTitle">添加图片</span></h3>
+                <p id="imagesUploadHint">点击或拖拽图片到此处</p>
+            </div>
+        </div>
+
+        <div class="preview-section" id="previewSection">
+            <button type="button" class="fullscreen-close" id="fullscreenClose" title="退出全屏">✕</button>
+            <div id="previewContainer">
+                <p id="placeholder">添加图片就能开始啦~ (・ω・)ノ</p>
+                <div id="previewGrid" class="preview-grid" style="display: none;"></div>
+            </div>
+            <div class="summary-bar" id="summaryBar" style="display:none;">
+                <div class="summary-items">
+                    <div class="summary-item"><span class="summary-label">原图共</span><b id="totalOriginal">—</b></div>
+                    <div class="summary-item"><span class="summary-label">处理后</span><b id="totalCompressed">—</b></div>
+                    <div class="summary-item summary-saving"><span class="summary-label" id="totalSavingLabel">总节省</span><b id="totalSaving">—</b></div>
+                </div>
+                <div class="summary-actions">
+                    <button type="button" class="pill-button pill-mini" id="resetParamsBtn" title="重置压缩/水印/EXIF参数">重置参数</button>
+                    <button type="button" class="pill-button pill-mini" id="clearAllBtn" title="清除所有图片">清空照片</button>
+                    <button type="button" class="pill-button pill-mini pill-icon" id="expandPreviewBtn" title="全屏预览">⛶</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== 压缩设置 ====== -->
+        <div class="section-block" id="compressSection">
+            <div class="section-header" id="compressHeader">
+                <div class="section-header-left">
+                    <span class="section-arrow">▼</span>
+                    <span class="section-title">压缩设置</span>
+                </div>
+                <label class="pw-switch" onclick="event.stopPropagation()">
+                    <input type="checkbox" id="compressEnable" checked>
+                    <span class="pw-switch-track"></span>
+                </label>
+            </div>
+            <div class="section-body">
+                <div class="control-grid control-grid-2">
+                    <div class="control-group control-span-full">
+                        <label>输出格式</label>
+                        <div class="pw-segmented" id="formatSelect" role="tablist" aria-label="输出格式">
+                            <button type="button" class="pw-seg-btn active" data-fmt="auto">自动</button>
+                            <button type="button" class="pw-seg-btn" data-fmt="image/jpeg">JPEG</button>
+                            <button type="button" class="pw-seg-btn" data-fmt="image/webp">WebP</button>
+                            <button type="button" class="pw-seg-btn" data-fmt="image/avif">AVIF</button>
+                            <button type="button" class="pw-seg-btn" data-fmt="image/png">PNG</button>
+                        </div>
+                        <p class="control-hint" id="formatHint">「自动」按原图格式输出</p>
+                    </div>
+
+                    <div class="control-group" id="qualityGroup">
+                        <div class="pw-slider-row quality-mode-row">
+                            <label class="quality-mode-label">质量</label>
+                            <div class="pw-segmented" id="qualityModeSelect" role="tablist" aria-label="压缩方式">
+                                <button type="button" class="pw-seg-btn" data-mode="fixed">固定质量</button>
+                                <button type="button" class="pw-seg-btn active" data-mode="adaptive">自适应</button>
+                            </div>
+                        </div>
+
+                        <div class="pw-slider-row" id="qualitySliderRow" style="display:none;">
+                            <input type="range" class="pw-slider" id="qualitySlider" min="10" max="100" value="99">
+                            <input type="number" class="pw-number" id="qualityInput" min="10" max="100" value="99">
+                            <span class="pw-unit">%</span>
+                        </div>
+
+                        <div class="pw-segmented adaptive-level-seg" id="adaptiveLevelSelect" role="tablist" aria-label="画质档位">
+                            <button type="button" class="pw-seg-btn" data-level="high">画质优先</button>
+                            <button type="button" class="pw-seg-btn active" data-level="balanced">均衡</button>
+                            <button type="button" class="pw-seg-btn" data-level="small">体积优先</button>
+                        </div>
+
+                        <p class="control-hint" id="qualityHint">自适应就是在多个质量下反复编码并比对以找到最优质量设置。画质优先指的是接近视觉无损并且留有充足的编辑空间。体积优先就是压至稍微可察觉。PNG 按档位自动量化为 256 色。</p>
+                    </div>
+
+                    <div class="control-group" id="resizeGroup">
+                        <label>最长边限制</label>
+                        <div class="pw-switch-row">
+                            <label class="pw-switch">
+                                <input type="checkbox" id="resizeEnable">
+                                <span class="pw-switch-track"></span>
+                            </label>
+                            <input type="number" class="pw-number" id="resizeInput" min="100" max="20000" value="1920" disabled>
+                            <span class="pw-unit">px</span>
+                        </div>
+                        <p class="control-hint">超过该尺寸的图片等比缩小。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== 水印设置 ====== -->
+        <div class="section-block with-persistent collapsed" id="watermarkSection">
+            <div class="section-header" id="watermarkHeader">
+                <div class="section-header-left">
+                    <span class="section-arrow">▼</span>
+                    <span class="section-title">水印设置</span>
+                </div>
+                <label class="pw-switch" onclick="event.stopPropagation()">
+                    <input type="checkbox" id="watermarkEnable">
+                    <span class="pw-switch-track"></span>
+                </label>
+            </div>
+            <div class="section-persistent">
+                <div class="watermark-upload-area" id="watermarkUploadBox">
+                    <input type="file" id="watermarkInput" accept="image/*" style="display:none;">
+                    <span class="watermark-upload-icon"><img src="img/dock-icon/layers_64dp.svg" alt=""></span>
+                    <span class="watermark-upload-text" id="watermarkFileName">点击或拖拽水印图片</span>
+                    <button type="button" class="remove-watermark-btn" id="removeWatermarkBtn" style="display:none;">✕</button>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="control-grid control-grid-3">
+                    <div class="control-group control-span-2" id="positionGroup">
+                        <label>水印位置</label>
+                        <div class="pw-segmented" id="positionModeSelect" role="tablist" aria-label="水印位置模式">
+                            <button type="button" class="pw-seg-btn active" data-mode="single">单个</button>
+                            <button type="button" class="pw-seg-btn" data-mode="tile">平铺</button>
+                        </div>
+                        <div class="position-grid" id="positionGrid">
+                            <div class="position-cell" data-pos="top-left" onclick="selectPosition('top-left')">↖</div>
+                            <div class="position-cell" data-pos="top-center" onclick="selectPosition('top-center')">↑</div>
+                            <div class="position-cell" data-pos="top-right" onclick="selectPosition('top-right')">↗</div>
+                            <div class="position-cell" data-pos="center-left" onclick="selectPosition('center-left')">←</div>
+                            <div class="position-cell" data-pos="center" onclick="selectPosition('center')">●</div>
+                            <div class="position-cell" data-pos="center-right" onclick="selectPosition('center-right')">→</div>
+                            <div class="position-cell" data-pos="bottom-left" onclick="selectPosition('bottom-left')">↙</div>
+                            <div class="position-cell" data-pos="bottom-center" onclick="selectPosition('bottom-center')">↓</div>
+                            <div class="position-cell active" data-pos="bottom-right" onclick="selectPosition('bottom-right')">↘</div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>水印大小</label>
+                        <div class="pw-slider-row">
+                            <input type="range" class="pw-slider" id="sizeSlider" min="5" max="100" value="20">
+                            <input type="number" class="pw-number" id="sizeInput" min="5" max="200" value="20">
+                            <span class="pw-unit">%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>透明度</label>
+                        <div class="pw-slider-row">
+                            <input type="range" class="pw-slider" id="opacitySlider" min="0" max="100" value="50">
+                            <input type="number" class="pw-number" id="opacityInput" min="0" max="100" value="50">
+                            <span class="pw-unit">%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>旋转角度</label>
+                        <div class="pw-slider-row">
+                            <input type="range" class="pw-slider" id="rotationSlider" min="-180" max="180" value="0">
+                            <input type="number" class="pw-number" id="rotationInput" min="-180" max="180" value="0">
+                            <span class="pw-unit">°</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group" id="offsetXGroup">
+                        <label>水平偏移</label>
+                        <div class="pw-slider-row">
+                            <input type="range" class="pw-slider" id="offsetXSlider" min="-200" max="200" value="0">
+                            <input type="number" class="pw-number" id="offsetXInput" min="-500" max="500" value="0">
+                            <span class="pw-unit">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group" id="offsetYGroup">
+                        <label>垂直偏移</label>
+                        <div class="pw-slider-row">
+                            <input type="range" class="pw-slider" id="offsetYSlider" min="-200" max="200" value="0">
+                            <input type="number" class="pw-number" id="offsetYInput" min="-500" max="500" value="0">
+                            <span class="pw-unit">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group" id="paddingGroup">
+                        <label>内边距</label>
+                        <div class="pw-slider-row">
+                            <input type="range" class="pw-slider" id="paddingSlider" min="0" max="200" value="20">
+                            <input type="number" class="pw-number" id="paddingInput" min="0" max="500" value="20">
+                            <span class="pw-unit">px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group disabled" id="tileSpacingGroup">
+                        <label>平铺间距</label>
+                        <div class="pw-slider-row">
+                            <input type="range" class="pw-slider" id="tileSpacingSlider" min="0" max="200" value="50">
+                            <input type="number" class="pw-number" id="tileSpacingInput" min="0" max="500" value="50">
+                            <span class="pw-unit">px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== EXIF（独立横条） ====== -->
+        <div class="exif-bar">
+            <label class="pw-switch">
+                <input type="checkbox" id="keepMetaEnable">
+                <span class="pw-switch-track"></span>
+            </label>
+            <div class="exif-text">
+                <span class="exif-label">保留元数据（EXIF）</span>
+                <span class="exif-hint">保留拍摄位置、相机型号、拍摄时间等。仅 JPEG 输出有效。</span>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="big-button primary" id="downloadAllBtn" disabled>下载全部（ZIP）</button>
+            <button class="big-button" id="downloadIndividualBtn" disabled>逐张下载</button>
+        </div>
+
+        <div class="note-block">
+            <p>所有的任务都只在你的本地完成，不会上传到任何服务器~ 压缩靠的是 <code>Canvas</code> 重绘再重新编码，自适应模式下还会在多个质量下反复编码并比对（PSNR），自动找到最好的一个质量</p>
+            <p>水印是直接画在画布上的，EXIF 保留则是用 <code>piexifjs</code> 把原始 JPEG 的拍摄信息重新塞回处理后的文件 (・ω・)ノ</p>
+            <p>输入端除了 JPEG/PNG/WebP/AVIF/GIF/BMP，还支持 <code>HEIC/HEIF</code>（iPhone 实拍格式）和 <code>TIFF</code>——这两种浏览器原生解不了，由 <code>heic2any</code> 和 <code>UTIF.js</code> 在首次遇到时从 CDN 拉取 WASM 解码。输出端则接入了 <code>imagequant</code>、<code>oxipng</code> 和 <code>@jsquash/avif</code> 来接近那些大佬写的服务端压缩效果。所有外部库都是首次用到时才加载，失败会自动回退到浏览器原生编码。</p>
+            <p>但也正因为全是本地计算，处理速度取决于你自己电脑的性能。另外由于前端库限制，只有 JPEG 能保留 EXIF 信息，暂时没办法 (´・ω・`)</p>
+        </div>
+        <div class="rename-section" id="renameSection" style="display:none;">
+            <label class="rename-label">文件名前缀：</label>
+            <input type="text" id="renameInput" class="rename-input" value="processed_" placeholder="留空则使用各图片自定义名称或原文件名">
+        </div>
+    </div>
+</main>
+
+<!-- 预览弹窗 -->
+<div class="preview-overlay" id="previewOverlay">
+    <div class="preview-overlay-content">
+        <h4 class="preview-overlay-title" id="previewOverlayTitle"></h4>
+        <img id="previewOverlayImg" alt="预览">
+        <br>
+        <button class="preview-overlay-close" id="previewOverlayClose">关闭</button>
+    </div>
+</div>
+
+<script src="js/pages/image-tools.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

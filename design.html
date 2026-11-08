@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>设计语言 | PhasWer 的小站</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/design.css">
+</head>
+<body class="design-page">
+<script src="js/layout.js"></script>
+<header>
+    <div class="logo-group">
+        <img src="img/Phas-Wer-Dark.png" alt="PhasWer Logo">
+    </div>
+</header>
+
+<!-- 侧边栏切换按钮（始终可见：折叠/展开 + 移动端抽屉） -->
+<button class="design-nav-toggle" aria-label="切换导航">
+    <svg class="toggle-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+    </svg>
+    <svg class="toggle-icon-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+</button>
+<div class="design-nav-overlay"></div>
+
+<!-- 左侧导航 -->
+<aside class="design-sidebar">
+    <div class="design-sidebar-head">
+        <div class="head-text">
+            <h3>设计语言</h3>
+            <p>PhasWer · Frostart</p>
+        </div>
+    </div>
+    <nav class="design-nav">
+        <div class="nav-group">
+            <span class="nav-group-title">基础令牌</span>
+            <button class="nav-link" data-target="sec-radius">圆角系统</button>
+            <button class="nav-link" data-target="sec-shadow">阴影层级</button>
+        </div>
+        <div class="nav-group">
+            <span class="nav-group-title">动效系统</span>
+            <button class="nav-link" data-target="sec-easing">缓动函数</button>
+            <button class="nav-link" data-target="sec-weight">重量感与缩放</button>
+            <button class="nav-link" data-target="sec-fade">渐入动画</button>
+        </div>
+        <div class="nav-group">
+            <span class="nav-group-title">毛玻璃与背景</span>
+            <button class="nav-link" data-target="sec-glass">毛玻璃效果</button>
+            <button class="nav-link" data-target="sec-bg">背景原理</button>
+        </div>
+        <div class="nav-group">
+            <span class="nav-group-title">组件</span>
+            <button class="nav-link" data-target="sec-buttons">基础按钮</button>
+            <button class="nav-link" data-target="sec-cards">卡片型操作</button>
+            <button class="nav-link" data-target="sec-selectors">自定义控件</button>
+            <button class="nav-link" data-target="sec-forms">输入控件</button>
+            <button class="nav-link" data-target="sec-navigation">导航</button>
+            <button class="nav-link" data-target="sec-feedback">反馈</button>
+            <button class="nav-link" data-target="sec-overlays">浮层</button>
+        </div>
+        <div class="nav-group">
+            <span class="nav-group-title">参考</span>
+            <button class="nav-link" data-target="sec-tokens">令牌总览</button>
+            <button class="nav-link" data-target="sec-outro">写在最后</button>
+        </div>
+    </nav>
+</aside>
+
+<main>
+    <!-- Hero 部分 -->
+    <section class="page-hero">
+        <h1 class="page-hero-title">设计语言</h1>
+        <p class="page-hero-subtitle">
+            这是可能是我能力所及的最好的 UI 设计了<br>
+            即使很多设计理念和细节至今仍然没有运用在主站上，但我未来的每一次更新都会以这个页面所描述的目标为方向<br>
+            不过这其实并不是一份规范文档，因为确实太随意了，只能算是记录一下UI<br>
+            如果你也觉得这些东西有意思，欢迎直接复制代码去用，希望能够帮到你<br><br>
+            *虽然这个页面主要面向桌面端浏览，但由于大部分组件也都做了移动端适配，所以如果示例代码中包含 @media 移动端规则，在桌面端可能看不出效果，建议在手机上或浏览器开发者工具的设备模拟中查看<br>
+            *此页面在3.0.0中被首次加入，在3.13.0版本中进行了更详细的重编和优化
+        </p>
+    </section>
+
+    <!-- =========================================
+         基础令牌：圆角系统 + 阴影层级
+         ========================================= -->
+    <div class="card" id="sec-radius">
+        <h2 class="section-title">圆角系统</h2>
+        <p class="section-intro">
+            现在的圆角系统是在0.9.0版本设计的。核心原则是圆角与元素尺寸成正比，层级相近的元素圆角相近
+        </p>
+
+        <div class="subsection">
+            <div class="radius-demo">
+                <div class="radius-item radius-sm" onclick="alert('--radius-sm: 20px')">
+                    <span class="radius-value">20px</span>
+                    <span class="radius-name">--radius-sm</span>
+                </div>
+                <div class="radius-item radius-md" onclick="alert('--radius-md: 30px')">
+                    <span class="radius-value">30px</span>
+                    <span class="radius-name">--radius-md</span>
+                </div>
+                <div class="radius-item radius-lg" onclick="alert('--radius-lg: 40px')">
+                    <span class="radius-value">40px</span>
+                    <span class="radius-name">--radius-lg</span>
+                </div>
+                <div class="radius-item radius-xl" onclick="alert('--radius-xl: 60px')">
+                    <span class="radius-value">60px</span>
+                    <span class="radius-name">--radius-xl</span>
+                </div>
+            </div>
+            <div class="code-block">
+                <span class="comment">/* 圆角系统变量 */</span><br>
+                <span class="punc">:</span><span class="sel">root</span> <span class="punc">{</span><br>
+                &nbsp;&nbsp;<span class="prop">--radius-sm</span><span class="punc">:</span>&nbsp;&nbsp;<span class="val">20px</span><span class="punc">;</span>&nbsp;&nbsp;<span class="comment">/* 小元素 */</span><br>
+                &nbsp;&nbsp;<span class="prop">--radius-md</span><span class="punc">:</span>&nbsp;&nbsp;<span class="val">30px</span><span class="punc">;</span>&nbsp;&nbsp;<span class="comment">/* 中元素 */</span><br>
+                &nbsp;&nbsp;<span class="prop">--radius-lg</span><span class="punc">:</span>&nbsp;&nbsp;<span class="val">40px</span><span class="punc">;</span>&nbsp;&nbsp;<span class="comment">/* 大元素 */</span><br>
+                &nbsp;&nbsp;<span class="prop">--radius-xl</span><span class="punc">:</span>&nbsp;&nbsp;<span class="val">60px</span><span class="punc">;</span>&nbsp;&nbsp;<span class="comment">/* 超大元素 */</span><br>
+                &nbsp;&nbsp;<span class="prop">--radius-max</span><span class="punc">:</span> <span class="val">80px</span><span class="punc">;</span>&nbsp;&nbsp;<span class="comment">/* 最大元素 */</span><br>
+                &nbsp;&nbsp;<span class="prop">--radius-pill</span><span class="punc">:</span> <span class="val">9999px</span><span class="punc">;</span> <span class="comment">/* 胶囊形状 */</span><br>
+                <span class="punc">}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="sec-shadow">
+        <h2 class="section-title">阴影层级</h2>
+        <p class="section-intro">
+            阴影的效果由两层物理模型共同完成，分别是紧贴物体的接触影和模拟环境光散射的环境影。层级越高两层都越扩散；hover 时阴影等级同步升级
+        </p>
+
+        <div class="subsection">
+            <div class="shadow-demo">
+                <div class="shadow-item shadow-sm"><span class="shadow-value">sm</span></div>
+                <div class="shadow-item shadow-md"><span class="shadow-value">md</span></div>
+                <div class="shadow-item shadow-lg"><span class="shadow-value">lg</span></div>
+                <div class="shadow-item shadow-xl"><span class="shadow-value">xxl</span></div>
+            </div>
+            <div class="code-block">
+                <span class="comment">/* 阴影系统变量 */</span><br>
+                <span class="punc">:</span><span class="sel">root</span> <span class="punc">{</span><br>
+                &nbsp;&nbsp;<span class="prop">--shadow-sm</span><span class="punc">:</span>&nbsp;&nbsp;<span class="val">0 2px 8px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.04)</span><span class="punc">;</span><br>
+                &nbsp;&nbsp;<span class="prop">--shadow-md</span><span class="punc">:</span>&nbsp;&nbsp;<span class="val">0 3px 10px rgba(0,0,0,.10), 0 8px 24px rgba(0,0,0,.05)</span><span class="punc">;</span><br>
+                &nbsp;&nbsp;<span class="prop">--shadow-lg</span><span class="punc">:</span>&nbsp;&nbsp;<span class="val">0 4px 12px rgba(0,0,0,.10), 0 16px 40px rgba(0,0,0,.06)</span><span class="punc">;</span><br>
+                &nbsp;&nbsp;<span class="prop">--shadow-xxl</span><span class="punc">:</span> <span class="val">0 6px 16px rgba(0,0,0,.12), 0 24px 60px rgba(0,0,0,.06)</span><span class="punc">;</span><br>
+                <span class="punc">}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         动效系统：缓动函数 + 重量感与缩放 + 渐入动画
+         ========================================= -->
+    <div class="card" id="sec-easing">
+        <h2 class="section-title">缓动函数</h2>
+        <p class="section-intro">
+            我在 2025 年 10 月之前一直感觉缓动函数不重要，直到开始写“回到页首”功能时才发现它的重要性<br>（╯°Д°）╯︵ ┻━┻ 纵享丝滑的感觉太爽了啊啊啊啊<br>我主要用两个 cubic-bezier，分别模拟两种不同的物理现象。点击下面的演示区可以体验一下差异
+        </p>
+
+        <div class="subsection">
+            <h3 class="subsection-title">cubic-bezier(0.16, 1, 0.3, 1) — 吸附缓动</h3>
+            <p class="subsection-desc">
+                这是我原创的缓动函数。特点是开始极快，然后逐渐减速直到精准停止。像把磁铁的感觉。适用于 Hover、Active、scale 变化等小幅度运动场景来模拟按钮的质感
+            </p>
+            <div class="easing-demo" onclick="playEasing(this)">
+                <div class="easing-ball" style="transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);"></div>
+            </div>
+            <div class="code-block">
+                <span class="comment">/* 吸附缓动 - 适用于小幅度运动 */</span><br>
+                <span class="sel">.button</span> <span class="punc">{</span><br>
+                &nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)</span><span class="punc">;</span><br>
+                <span class="punc">}</span><br><br>
+                <span class="sel">.button:hover</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(1.08)</span><span class="punc">;</span> <span class="punc">}</span><br>
+                <span class="sel">.button:active</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.85)</span><span class="punc">;</span> <span class="punc">}</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title purple">cubic-bezier(0.2, 0.8, 0.4, 1) — 平滑缓动</h3>
+            <p class="subsection-desc">
+                这是我从苹果的开发者文档《Human Interface Guidelines》中《借鉴》来的。特点是先快后慢，模拟真实世界中发力滑行制动的过程。适用于返回页首、渐入动画、开关切换等大幅度运动场景
+            </p>
+            <div class="easing-demo" onclick="playEasing(this)">
+                <div class="easing-ball purple" style="transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.4, 1);"></div>
+            </div>
+            <div class="code-block">
+                <span class="comment">/* 平滑缓动 - 适用于大幅度运动 */</span><br>
+                <span class="sel">.card</span> <span class="punc">{</span><br>
+                &nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">transform 0.8s cubic-bezier(0.2, 0.8, 0.4, 1), opacity 0.8s ease</span><span class="punc">;</span><br>
+                <span class="punc">}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="sec-weight">
+        <h2 class="section-title">重量感与缩放</h2>
+        <p class="section-intro">
+            通过不同的缩放比例和前面提到的缓动函数组合，可以给元素赋予不同的重量感。
+        </p>
+
+        <div class="subsection">
+            <p class="subsection-desc">
+                下面的三个方块分别代表轻、中、重三种重量感。Hover 体验差异：
+            </p>
+            <div class="weight-demo">
+                <div class="weight-box light">轻<br>0.15s</div>
+                <div class="weight-box medium">中<br>0.3s</div>
+                <div class="weight-box heavy">重<br>0.5s</div>
+            </div>
+            <div class="code-block">
+                <span class="comment">/* 重量感对照 */</span><br>
+                <span class="sel">.light</span> <span class="punc">{</span> <span class="prop">transition</span><span class="punc">:</span> <span class="val">transform 0.15s ease</span><span class="punc">;</span> <span class="punc">}</span><br>
+                <span class="sel">.medium</span> <span class="punc">{</span> <span class="prop">transition</span><span class="punc">:</span> <span class="val">transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)</span><span class="punc">;</span> <span class="punc">}</span><br>
+                <span class="sel">.heavy</span> <span class="punc">{</span> <span class="prop">transition</span><span class="punc">:</span> <span class="val">transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)</span><span class="punc">;</span> <span class="punc">}</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title green">缩放比例的选择</h3>
+            <p class="subsection-desc">
+                所有的按钮在Hover 时都是 scale(1.08)，Active 时都是 scale(0.85)。具体也写不出什么，就是感觉舒服
+            </p>
+            <div class="code-block">
+                <span class="sel">.dock button:hover</span> <span class="punc">{</span><br>
+                &nbsp;&nbsp;<span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(1.08)</span><span class="punc">;</span> <span class="comment">/* 放大 */</span><br>
+                <span class="punc">}</span><br><br>
+                <span class="sel">.dock button:active</span> <span class="punc">{</span><br>
+                &nbsp;&nbsp;<span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.85)</span><span class="punc">;</span> <span class="comment">/* 缩小 */</span><br>
+                <span class="punc">}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="sec-fade">
+        <h2 class="section-title">渐入动画</h2>
+        <p class="section-intro">
+            用于页面加载时的元素渐入动画。我使用了 translateY + opacity 的组合，让元素像是从下方浮上来的，同时淡入。具体的动画时间是0.8s，缓动函数是前文提到的 cubic-bezier(0.2, 0.8, 0.4, 1)
+        </p>
+
+        <div class="subsection">
+            <div class="fade-demo">
+                <div class="fade-box linear" onclick="this.classList.toggle('hidden')">linear</div>
+                <div class="fade-box ease" onclick="this.classList.toggle('hidden')">ease</div>
+                <div class="fade-box custom" onclick="this.classList.toggle('hidden')">custom</div>
+            </div>
+            <div class="code-block">
+                <span class="comment">/* 入场动画 */</span><br>
+                <span class="sel">.card</span> <span class="punc">{</span><br>
+                &nbsp;&nbsp;<span class="prop">transform</span><span class="punc">:</span> <span class="val">translateY(40px)</span><span class="punc">;</span><br>
+                &nbsp;&nbsp;<span class="prop">opacity</span><span class="punc">:</span> <span class="val">0</span><span class="punc">;</span><br>
+                &nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="val">transform 0.8s cubic-bezier(0.2, 0.8, 0.4, 1)</span><span class="punc">,</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="val">opacity 0.8s ease</span><span class="punc">;</span><br>
+                <span class="punc">}</span><br><br>
+                <span class="sel">.animate-in</span> <span class="punc">{</span><br>
+                &nbsp;&nbsp;<span class="prop">transform</span><span class="punc">:</span> <span class="val">translateY(0) !important</span><span class="punc">;</span><br>
+                &nbsp;&nbsp;<span class="prop">opacity</span><span class="punc">:</span> <span class="val">1 !important</span><span class="punc">;</span><br>
+                <span class="punc">}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         毛玻璃与背景：毛玻璃效果 + 背景原理
+         ========================================= -->
+    <div class="card" id="sec-glass">
+        <h2 class="section-title">毛玻璃效果</h2>
+        <p class="section-intro">
+            毛玻璃（Glassmorphism）是整个站点最核心的视觉语言。这个玻璃效果是使用半透明背景 + 背景模糊 + 半透明边框做出来的<br>
+            不过不过在3.6.0版本修改网页背景后，最底层元素的blur效果被取消了以节省性能<br>
+            你可以拖动滑块调节参数，观察左侧玻璃的变化
+        </p>
+
+        <div class="subsection">
+            <div style="display: flex; gap: 24px; align-items: stretch; flex-wrap: wrap; justify-content: center;">
+                <div id="glassDemoBg" style="
+                    width: 320px; min-height: 280px; border-radius: 30px; position: relative; overflow: hidden;
+                    background: #f0f0f0;
+                    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+                ">
+                    <!-- 丰富的背景内容，让 blur 效果明显 -->
+                    <div style="position: absolute; width: 100%; height: 100%; font-family: monospace;">
+                        <div style="position: absolute; top: 10%; left: 8%; width: 70px; height: 70px; border-radius: 20px; background: #4f46e5;"></div>
+                        <div style="position: absolute; top: 15%; left: 35%; width: 55px; height: 55px; border-radius: 50%; background: #06b6d4;"></div>
+                        <div style="position: absolute; top: 8%; right: 10%; width: 80px; height: 40px; border-radius: 12px; background: #f43f5e;"></div>
+                        <div style="position: absolute; top: 35%; left: 12%; font-size: 20px; font-weight: 700; color: #333;">PhasWer</div>
+                        <div style="position: absolute; top: 50%; left: 40%; width: 90px; height: 60px; border-radius: 15px; background: #22c55e;"></div>
+                        <div style="position: absolute; bottom: 20%; left: 8%; width: 50px; height: 80px; border-radius: 20px; background: #eab308;"></div>
+                        <div style="position: absolute; bottom: 15%; right: 10%; width: 60px; height: 60px; border-radius: 50%; background: #a855f7;"></div>
+                        <div style="position: absolute; top: 42%; right: 8%; font-size: 14px; color: #666; line-height: 1.6;">
+                            设计语言<br>Design System
+                        </div>
+                        <div style="position: absolute; bottom: 8%; left: 35%; font-size: 11px; color: #999;">
+                            ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                        </div>
+                        <div style="position: absolute; top: 65%; left: 10%; width: 120px; height: 8px; border-radius: 4px; background: #fb923c;"></div>
+                        <div style="position: absolute; top: 72%; left: 10%; width: 80px; height: 8px; border-radius: 4px; background: #818cf8;"></div>
+                    </div>
+                    <div id="glassDemoBox" style="
+                        width: 260px; height: 260px; padding: 32px; border-radius: 30px; text-align: center; position: relative; z-index: 2;
+                        background: rgba(255, 255, 255, 0.35);
+                        backdrop-filter: saturate(150%) blur(8px);
+                        -webkit-backdrop-filter: saturate(150%) blur(8px);
+                        border: 2px solid rgba(255, 255, 255, 0.3);
+                        box-shadow: var(--shadow-lg);
+                        font-size: 16px; color: #333; font-weight: 500;
+                        transition: all 0.3s ease;
+                        display: flex; align-items: center; justify-content: center;
+                    ">磨砂玻璃</div>
+                </div>
+                <div style="flex: 1; min-width: 220px; display: flex; flex-direction: column; gap: 10px; justify-content: center;">
+                    <div class="glass-slider-wrap">
+                        <span>透明度</span>
+                        <input type="range" id="glassOpacity" min="0" max="100" value="35" oninput="updateGlassDemo()">
+                        <strong id="glassOpacityVal">0.35</strong>
+                    </div>
+                    <div class="glass-slider-wrap">
+                        <span>模糊</span>
+                        <input type="range" id="glassBlur" min="0" max="30" value="8" oninput="updateGlassDemo()">
+                        <strong id="glassBlurVal">8px</strong>
+                    </div>
+                    <div class="glass-slider-wrap">
+                        <span>饱和度</span>
+                        <input type="range" id="glassSat" min="50" max="300" value="150" oninput="updateGlassDemo()">
+                        <strong id="glassSatVal">150%</strong>
+                    </div>
+                    <div class="glass-slider-wrap">
+                        <span>边框</span>
+                        <input type="range" id="glassBorder" min="0" max="100" value="30" oninput="updateGlassDemo()">
+                        <strong id="glassBorderVal">0.3</strong>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-top: 2px;">
+                        <span style="font-size: 14px; color: #555; white-space: nowrap;">阴影</span>
+                        <div class="pw-segmented pw-segmented-wrap" id="glassShadowSelect" style="flex: 1;">
+                            <button type="button" class="pw-seg-btn" data-value="none" onclick="selectGlassShadow(this)">无</button>
+                            <button type="button" class="pw-seg-btn" data-value="var(--shadow-sm)" onclick="selectGlassShadow(this)">sm</button>
+                            <button type="button" class="pw-seg-btn" data-value="var(--shadow-md)" onclick="selectGlassShadow(this)">md</button>
+                            <button type="button" class="pw-seg-btn active" data-value="var(--shadow-lg)" onclick="selectGlassShadow(this)">lg</button>
+                            <button type="button" class="pw-seg-btn" data-value="var(--shadow-xxl)" onclick="selectGlassShadow(this)">xxl</button>
+                        </div>
+                    </div>
+                    <button onclick="resetGlassDemo()" class="glass-reset-btn">重置</button>
+                </div>
+            </div>
+            <div class="code-block">
+                <span class="comment">/* 毛玻璃完整属性 */</span><br>
+                <span class="sel">.card</span> <span class="punc">{</span><br>
+                &nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">rgba(255, 255, 255, 0.35)</span><span class="punc">;</span><br>
+                &nbsp;&nbsp;<span class="prop">backdrop-filter</span><span class="punc">:</span> <span class="val">saturate(150%) blur(8px)</span><span class="punc">;</span><br>
+                &nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">2px solid rgba(255, 255, 255, 0.3)</span><span class="punc">;</span><br>
+                &nbsp;&nbsp;<span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-lg)</span><span class="punc">;</span><br>
+                <span class="punc">}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="sec-bg">
+        <h2 class="section-title">背景原理</h2>
+        <p class="section-intro">
+            这个由多个动态光斑叠加而成的背景是在3.6.0版本被引入的<br>
+            光斑会随着鼠标滚动产生视差效果，营造出一种漂浮感。背景由三层叠加而成：渐变底色层、光斑层和玻璃内容层<br><br>
+            每个光斑都是一个径向渐变(radial-gradient)的圆形元素，使用半透明的颜色从中心向外逐渐变淡，位置用CSS变量控制，方便通过JS实现视差效果。点击下方卡片可逐层查看效果，第一张为完整叠加效果。
+        </p>
+
+        <div class="subsection">
+        <p style="margin-bottom: 16px; font-size: 14px; color: #666;">点击下方卡片查看各层效果：</p>
+        <div class="bg-demo-container" id="bgDemo">
+            <div class="bg-demo-base" id="bgBase"></div>
+            <div class="bg-demo-blob bg-demo-blob-1" id="bgBlob1"></div>
+            <div class="bg-demo-blob bg-demo-blob-2" id="bgBlob2"></div>
+            <div class="bg-demo-blob bg-demo-blob-3" id="bgBlob3"></div>
+            <div class="bg-demo-blob bg-demo-blob-4" id="bgBlob4"></div>
+            <div class="bg-demo-glass" id="bgGlass"></div>
+            <div class="bg-demo-label" id="bgDemoLabel">完整效果</div>
+        </div>
+        <div class="bg-layers-breakdown">
+            <div class="bg-layer-item bg-layer-complete active" onclick="showBgLayer('all')">
+                <span class="bg-layer-name">完整效果</span>
+            </div>
+            <div class="bg-layer-item bg-layer-base" onclick="showBgLayer('base')">
+                <span class="bg-layer-name">渐变底色</span>
+            </div>
+            <div class="bg-layer-item bg-layer-blob" onclick="showBgLayer('blob')">
+                <span class="bg-layer-name">光斑层</span>
+            </div>
+            <div class="bg-layer-item bg-layer-glass" onclick="showBgLayer('glass')">
+                <span class="bg-layer-name">玻璃态层</span>
+            </div>
+        </div>
+        <p style="margin-bottom: 16px; margin-top: 20px; font-size: 14px; color: #666;">点击方案切换背景渐变：</p>
+        <div class="bg-color-demo">
+            <div class="bg-color-item bg-gradient-1" onclick="applyBgGradient(1)">方案1</div>
+            <div class="bg-color-item bg-gradient-2" onclick="applyBgGradient(2)">方案2</div>
+            <div class="bg-color-item bg-gradient-3" onclick="applyBgGradient(3)">方案3</div>
+            <div class="bg-color-item bg-gradient-4" onclick="applyBgGradient(4)">方案4</div>
+        </div>
+
+        <div class="code-block">
+            <span class="comment">/* 光斑样式 */</span><br>
+            <span class="sel">.blob-1</span> <span class="punc">{</span><br>
+            &nbsp;&nbsp;<span class="prop">width</span><span class="punc">:</span> <span class="val">65vmax</span><span class="punc">;</span><br>
+            &nbsp;&nbsp;<span class="prop">height</span><span class="punc">:</span> <span class="val">65vmax</span><span class="punc">;</span><br>
+            &nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">radial-gradient(</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="val">circle,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="val">rgba(45, 136, 240, 0.45) 0%,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="val">rgba(45, 136, 240, 0.15) 45%,</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="val">transparent 65%</span><br>
+            &nbsp;&nbsp;<span class="val">)</span><span class="punc">;</span><br>
+            <span class="punc">}</span><br><br>
+            <span class="comment">/* 渐变方案 */</span><br>
+            <span class="punc">:</span><span class="sel">root</span> <span class="punc">{</span><br>
+            &nbsp;&nbsp;<span class="prop">--bg-main</span><span class="punc">:</span> <span class="val">rgba(255, 255, 255, 0.25)</span><span class="punc">;</span><br>
+            <span class="punc">}</span>
+        </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         按钮系统
+         ========================================= -->
+    <div class="card" id="sec-buttons">
+        <h2 class="section-title">基础按钮</h2>
+        <p class="section-intro">最长的一部分。在此网页中所有按钮遵循统一的 hover scale(1.08) / active scale(0.85 或 0.90) 反馈范式</p>
+
+        <div class="subsection">
+            <h3 class="subsection-title">胶囊按钮 pill-button <span class="src-tag pw">PW</span></h3>
+            <p class="subsection-desc">主站最常用的圆角按钮，在v3.7.2版本前叫做 member-button<br>
+            可以可用作 a / button / span，统一 hover scale(1.08) / active scale(0.85)</p>
+            <div class="demo-stage">
+                <button class="pill-button">普通按钮</button>
+                <a href="javascript:void(0)" class="pill-button">链接按钮</a>
+                <span class="pill-button">标签项</span>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="str">"..."</span> <span class="attr">class</span>=<span class="str">"pill-button"</span><span class="tag">&gt;</span>按钮文字<span class="tag">&lt;/a&gt;</span><br><br>
+<span class="comment">/* CSS 实现 */</span><br>
+<span class="sel">.pill-button</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">12px 36px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-pill)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">var(--bg-button)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-sm)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">font-size</span><span class="punc">:</span> <span class="val">16px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">font-weight</span><span class="punc">:</span> <span class="val">500</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">text-decoration</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">transform 0.15s ease</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.pill-button:hover</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(1.08)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.pill-button:active</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.85)</span><span class="punc">;</span> <span class="punc">}</span><br><br>
+<span class="comment">/* 移动端适配 */</span><br>
+<span class="sel">@media (max-width: 540px)</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="sel">.pill-button</span> <span class="punc">{</span> <span class="prop">min-width</span><span class="punc">:</span> <span class="val">80px</span><span class="punc">;</span> <span class="prop">padding</span><span class="punc">:</span> <span class="val">12px 18px</span><span class="punc">;</span> <span class="prop">font-size</span><span class="punc">:</span> <span class="val">14px</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="punc">}</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">大按钮 big-button <span class="src-tag pw">PW</span></h3>
+            <p class="subsection-desc">用于主行动入口，是真的0.1.2版本老资历了（？）</p>
+            <div class="demo-stage" style="gap:20px;">
+                <a href="javascript:void(0)" class="big-button">查看详情</a>
+                <a href="javascript:void(0)" class="big-button">前往预览</a>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="str">"..."</span> <span class="attr">class</span>=<span class="str">"big-button"</span><span class="tag">&gt;</span>查看详情<span class="tag">&lt;/a&gt;</span><br><br>
+<span class="comment">/* CSS 实现 */</span><br>
+<span class="sel">.big-button</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">width</span><span class="punc">:</span> <span class="val">150px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">height</span><span class="punc">:</span> <span class="val">80px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-lg)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">display</span><span class="punc">:</span> <span class="val">flex</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">align-items</span><span class="punc">:</span> <span class="val">center</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">justify-content</span><span class="punc">:</span> <span class="val">center</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">font-size</span><span class="punc">:</span> <span class="val">18px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">font-weight</span><span class="punc">:</span> <span class="val">600</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">color</span><span class="punc">:</span> <span class="val">#333</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">var(--bg-button)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-md)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.big-button:hover</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(1.08)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.big-button:active</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.85)</span><span class="punc">;</span> <span class="punc">}</span><br><br>
+<span class="comment">/* 移动端适配 */</span><br>
+<span class="sel">@media (max-width: 540px)</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="sel">.big-button</span> <span class="punc">{</span> <span class="prop">width</span><span class="punc">:</span> <span class="val">130px</span><span class="punc">;</span> <span class="prop">height</span><span class="punc">:</span> <span class="val">70px</span><span class="punc">;</span> <span class="prop">font-size</span><span class="punc">:</span> <span class="val">14px</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="punc">}</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Frostart 按钮变体 <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">为Frostart开发的按钮变体，包括确认 / 取消 / 危险 / 文字按钮四种，统一使用 16px 圆角，其中确认和文字按钮遵循用户设置的 accent-color</p>
+            <div class="demo-stage fs-accent">
+                <button class="demo-confirm-btn">确认</button>
+                <button class="demo-cancel-btn">取消</button>
+                <button class="demo-danger-btn">删除</button>
+                <button class="demo-text-btn">了解更多</button>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"confirm-btn"</span><span class="tag">&gt;</span>确认<span class="tag">&lt;/button&gt;</span><br>
+<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"cancel-btn"</span><span class="tag">&gt;</span>取消<span class="tag">&lt;/button&gt;</span><br>
+<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"danger-btn"</span><span class="tag">&gt;</span>删除<span class="tag">&lt;/button&gt;</span><br><br>
+<span class="comment">/* CSS 实现 - 确认按钮 */</span><br>
+<span class="sel">.confirm-btn</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">14px 20px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">16px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">var(--accent-color)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">color</span><span class="punc">:</span> <span class="val">#fff</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.confirm-btn:hover</span> <span class="punc">{</span> <span class="prop">filter</span><span class="punc">:</span> <span class="val">brightness(0.9)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.confirm-btn:active</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.85)</span><span class="punc">;</span> <span class="punc">}</span><br><br>
+<span class="comment">/* cancel-btn 用 border + 透明背景 */</span><br>
+<span class="comment">/* danger-btn 用红色系背景 */</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">Frostart 暗色态 <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">用深色舞台包裹展示的很帅的 Frostart 的 dark mode 组件！</p>
+            <div class="demo-stage dark" style="gap:20px;">
+                <button class="demo-confirm-btn">确认</button>
+                <button class="demo-cancel-btn">取消</button>
+                <div class="pw-switch-row">
+                    <span>深色模式</span>
+                    <label class="pw-switch"><input type="checkbox" checked><span class="pw-switch-track"></span></label>
+                </div>
+                <span class="demo-spinner"></span>
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <span class="demo-pulse-dot"></span>
+                    <span style="font-size:14px;">有新版本</span>
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 - 用 .dark 包裹切换深色态 */</span><br>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"demo-stage dark"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"confirm-btn"</span><span class="tag">&gt;</span>确认<span class="tag">&lt;/button&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;label</span> <span class="attr">class</span>=<span class="str">"pw-switch"</span><span class="tag">&gt;...&lt;/label&gt;</span><br>
+<span class="tag">&lt;/div&gt;</span><br><br>
+<span class="comment">/* CSS 实现 - .dark 重定义变量 */</span><br>
+<span class="sel">.dark</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">--text-primary</span><span class="punc">:</span> <span class="val">#f5f5f7</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">--text-secondary</span><span class="punc">:</span> <span class="val">#aaa</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">--bg-primary</span><span class="punc">:</span> <span class="val">#1a1a1c</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">--bg-card</span><span class="punc">:</span> <span class="val">rgba(40, 40, 42, 0.6)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">--accent-color</span><span class="punc">:</span> <span class="val">#7c8cff</span><span class="punc">;</span><br>
+<span class="punc">}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         卡片型操作
+         ========================================= -->
+    <div class="card" id="sec-cards">
+        <h2 class="section-title">卡片型操作</h2>
+        <p class="section-intro">复合卡片式操作组件目前又选项切换、下载入口等带有布局结构的交互元素，通常还有另一层包裹</p>
+
+        <div class="subsection">
+            <h3 class="subsection-title">选项按钮 option-btn <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">用于设置项多选一，点击切换选中态，选中时背景加深</p>
+            <div class="demo-stage fs-accent" data-demo-group style="gap:10px;">
+                <button class="demo-option-btn active">紧凑</button>
+                <button class="demo-option-btn">标准</button>
+                <button class="demo-option-btn">宽松</button>
+                <button class="demo-option-btn">自定义</button>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"option-btn active"</span><span class="tag">&gt;</span>紧凑<span class="tag">&lt;/button&gt;</span><br>
+<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"option-btn"</span><span class="tag">&gt;</span>标准<span class="tag">&lt;/button&gt;</span><br><br>
+<span class="comment">/* CSS 实现 */</span><br>
+<span class="sel">.option-btn</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">12px 8px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">16px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">rgba(255, 255, 255, 0.5)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">var(--border-glass)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-sm)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.option-btn.active</span> <span class="punc">{</span> <span class="prop">background</span><span class="punc">:</span> <span class="val">var(--bg-active)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.option-btn:hover</span> <span class="punc">{</span> <span class="prop">background</span><span class="punc">:</span> <span class="val">var(--bg-hover)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.option-btn:active</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.85)</span><span class="punc">;</span> <span class="punc">}</span><br><br>
+<span class="comment">/* 移动端适配：缩小尺寸，自动换行 */</span><br>
+<span class="sel">@media (max-width: 540px)</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="sel">.option-btn</span> <span class="punc">{</span> <span class="prop">padding</span><span class="punc">:</span> <span class="val">10px 6px</span><span class="punc">;</span> <span class="prop">font-size</span><span class="punc">:</span> <span class="val">13px</span><span class="punc">;</span> <span class="prop">max-width</span><span class="punc">:</span> <span class="val">100px</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="punc">}</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">资源包下载卡 pack-download-card <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">Frostart 安装包的下载入口卡片，图标 + 信息 + 下载按钮 （最费肝的一集x）</p>
+            <div class="demo-stage fs-accent">
+                <div class="demo-pack-download-card">
+                    <div class="demo-pack-icon-badge" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                    </div>
+                    <div class="demo-pack-download-info">
+                        <div class="demo-pack-download-title">获取项目文件以安装</div>
+                        <div class="demo-update-guide" style="margin-top:8px;">
+                            <ol class="demo-update-guide-steps">
+                                <li>点击右侧「下载安装包」，获取 ZIP 文件</li>
+                                <li>解压下载的文件</li>
+                                <li>在开启开发者模式的浏览器扩展管理中点击加载解压缩的扩展，选择这个文件夹即可</li>
+                            </ol>
+                            <div class="demo-update-guide-note">需在本插件已加载的新标签页里使用</div>
+                        </div>
+                    </div>
+                    <button class="demo-pack-download-btn" type="button">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        <span class="demo-pack-btn-label">下载安装包</span>
+                    </button>
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"pack-download-card"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"pack-icon-badge"</span> <span class="attr">aria-hidden</span>=<span class="str">"true"</span><span class="tag">&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;/div&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"pack-download-info"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"pack-download-title"</span><span class="tag">&gt;</span>获取项目文件以安装<span class="tag">&lt;/div&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"update-guide"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;ol</span> <span class="attr">class</span>=<span class="str">"update-guide-steps"</span><span class="tag">&gt;&lt;li&gt;...&lt;li&gt;...&lt;li&gt;...&lt;/ol&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"update-guide-note"</span><span class="tag">&gt;</span>需在本插件已加载的新标签页里使用<span class="tag">&lt;/div&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/div&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;/div&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"pack-download-btn"</span> <span class="attr">type</span>=<span class="str">"button"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;svg&gt;...&lt;/svg&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"pack-btn-label"</span><span class="tag">&gt;</span>下载安装包<span class="tag">&lt;/span&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;/button&gt;</span><br>
+<span class="tag">&lt;/div&gt;</span><br><br>
+<span class="comment">/* CSS 实现 */</span><br>
+<span class="sel">.pack-download-card</span> <span class="punc">{</span> <span class="prop">display</span><span class="punc">:</span> <span class="val">flex</span><span class="punc">;</span> <span class="prop">align-items</span><span class="punc">:</span> <span class="val">center</span><span class="punc">;</span> <span class="prop">gap</span><span class="punc">:</span> <span class="val">16px</span><span class="punc">;</span> <span class="prop">padding</span><span class="punc">:</span> <span class="val">20px</span><span class="punc">;</span> <span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-md)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">linear-gradient(135deg, color-mix(...), transparent 60%), var(--bg-secondary)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">1px solid color-mix(in srgb, var(--accent-color) 35%, transparent)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.pack-download-card:hover</span> <span class="punc">{</span> <span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">0 6px 24px color-mix(in srgb, var(--accent-color) 18%, transparent)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.pack-icon-badge</span> <span class="punc">{</span> <span class="prop">width</span><span class="punc">:</span> <span class="val">48px</span><span class="punc">;</span> <span class="prop">height</span><span class="punc">:</span> <span class="val">48px</span><span class="punc">;</span> <span class="prop">background</span><span class="punc">:</span> <span class="val">color-mix(in srgb, var(--accent-color) 20%, transparent)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.pack-download-btn</span> <span class="punc">{</span> <span class="prop">padding</span><span class="punc">:</span> <span class="val">12px 22px</span><span class="punc">;</span> <span class="prop">background</span><span class="punc">:</span> <span class="val">var(--accent-color)</span><span class="punc">;</span> <span class="prop">color</span><span class="punc">:</span> <span class="val">#fff</span><span class="punc">;</span> <span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-sm)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">0 4px 14px color-mix(in srgb, var(--accent-color) 35%, transparent)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.pack-download-btn:hover</span> <span class="punc">{</span> <span class="prop">background</span><span class="punc">:</span> <span class="val">color-mix(in srgb, var(--accent-color) 86%, #000)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.pack-download-btn:active</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.85)</span><span class="punc">;</span> <span class="punc">}</span><br><br>
+<span class="comment">/* 移动端适配：纵向堆叠，避免文字被挤成一行 */</span><br>
+<span class="sel">@media (max-width: 768px)</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="sel">.pack-download-card</span> <span class="punc">{</span> <span class="prop">flex-direction</span><span class="punc">:</span> <span class="val">column</span><span class="punc">;</span> <span class="prop">align-items</span><span class="punc">:</span> <span class="val">stretch</span><span class="punc">;</span> <span class="prop">width</span><span class="punc">:</span> <span class="val">100%</span><span class="punc">;</span> <span class="punc">}</span><br>
+&nbsp;&nbsp;<span class="sel">.pack-download-info</span> <span class="punc">{</span> <span class="prop">width</span><span class="punc">:</span> <span class="val">100%</span><span class="punc">;</span> <span class="punc">}</span><br>
+&nbsp;&nbsp;<span class="sel">.pack-download-btn</span> <span class="punc">{</span> <span class="prop">width</span><span class="punc">:</span> <span class="val">100%</span><span class="punc">;</span> <span class="prop">justify-content</span><span class="punc">:</span> <span class="val">center</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="punc">}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         选择控件
+         ========================================= -->
+    <div class="card" id="sec-selectors">
+        <h2 class="section-title">自定义控件</h2>
+        <p class="section-intro">用于隐藏原生控件的自定义控件们，目前包括开关、滑块、分段选择和色彩选择器（对于Mac等部分平台可能反倒是降级但统一一点总是好的w）</p>
+
+        <div class="subsection">
+            <h3 class="subsection-title">开关 pw-switch <span class="src-tag both">PW · FS</span></h3>
+            <p class="subsection-desc">PhasWer 和 Frostart 通用的开关</p>
+            <div class="demo-stage left" style="gap:20px;">
+                <div class="pw-switch-row">
+                    <span>通知提醒</span>
+                    <label class="pw-switch"><input type="checkbox" checked><span class="pw-switch-track"></span></label>
+                </div>
+                <div class="pw-switch-row">
+                    <span>自动保存</span>
+                    <label class="pw-switch"><input type="checkbox"><span class="pw-switch-track"></span></label>
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"pw-switch-row"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;span&gt;</span>通知提醒<span class="tag">&lt;/span&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;label</span> <span class="attr">class</span>=<span class="str">"pw-switch"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="str">"checkbox"</span> <span class="attr">checked</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"pw-switch-track"</span><span class="tag">&gt;&lt;/span&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;/label&gt;</span><br>
+<span class="tag">&lt;/div&gt;</span><br><br>
+<span class="comment">/* CSS 实现 */</span><br>
+<span class="sel">.pw-switch</span> <span class="punc">{</span> <span class="prop">position</span><span class="punc">:</span> <span class="val">relative</span><span class="punc">;</span> <span class="prop">width</span><span class="punc">:</span> <span class="val">48px</span><span class="punc">;</span> <span class="prop">height</span><span class="punc">:</span> <span class="val">28px</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.pw-switch input</span> <span class="punc">{</span> <span class="prop">opacity</span><span class="punc">:</span> <span class="val">0</span><span class="punc">;</span> <span class="prop">position</span><span class="punc">:</span> <span class="val">absolute</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.pw-switch-track</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">position</span><span class="punc">:</span> <span class="val">absolute</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-pill)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">background 0.3s ease</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.pw-switch-track::before</span> <span class="punc">{</span> <span class="comment">/* 圆点 */</span><br>
+&nbsp;&nbsp;<span class="prop">content</span><span class="punc">:</span> <span class="val">""</span><span class="punc">;</span> <span class="prop">width</span><span class="punc">:</span> <span class="val">22px</span><span class="punc">;</span> <span class="prop">height</span><span class="punc">:</span> <span class="val">22px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">50%</span><span class="punc">;</span> <span class="prop">background</span><span class="punc">:</span> <span class="val">#fff</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.pw-switch input:checked ~ .pw-switch-track::before</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">transform</span><span class="punc">:</span> <span class="val">translateX(20px)</span><span class="punc">;</span><br>
+<span class="punc">}</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">滑块 pw-slider <span class="src-tag both">PW · FS</span></h3>
+            <p class="subsection-desc">自定义的滑块控件，用来替代原生 input range</p>
+            <div class="demo-stage left" style="gap:16px;">
+                <div class="pw-slider-row" style="min-width:300px;">
+                    <span>音量</span>
+                    <input type="range" class="pw-slider" min="0" max="100" value="60">
+                    <span class="pw-number">60</span>
+                    <span class="pw-unit">%</span>
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"pw-slider-row"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;span&gt;</span>音量<span class="tag">&lt;/span&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="str">"range"</span> <span class="attr">class</span>=<span class="str">"pw-slider"</span> <span class="attr">min</span>=<span class="str">"0"</span> <span class="attr">max</span>=<span class="str">"100"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"pw-number"</span><span class="tag">&gt;</span>60<span class="tag">&lt;/span&gt;</span><br>
+<span class="tag">&lt;/div&gt;</span><br><br>
+<span class="comment">/* CSS 实现 */</span><br>
+<span class="sel">.pw-slider</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">-webkit-appearance</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">height</span><span class="punc">:</span> <span class="val">8px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-pill)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">rgba(0, 0, 0, 0.1)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.pw-slider::-webkit-slider-thumb</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">-webkit-appearance</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">width</span><span class="punc">:</span> <span class="val">20px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">height</span><span class="punc">:</span> <span class="val">20px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">50%</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">var(--accent-color)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.pw-slider::-webkit-slider-thumb:hover</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(1.08)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.pw-slider::-webkit-slider-thumb:active</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.85)</span><span class="punc">;</span> <span class="punc">}</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">分段选择 pw-segmented <span class="src-tag pw">PW</span></h3>
+            <p class="subsection-desc">用来替代原生 select 的分段选择器，上面毛玻璃演示里的阴影选项就是用的这个</p>
+            <div class="demo-stage">
+                <div class="pw-segmented" data-demo-group>
+                    <button type="button" class="pw-seg-btn active">列表</button>
+                    <button type="button" class="pw-seg-btn">网格</button>
+                    <button type="button" class="pw-seg-btn">卡片</button>
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"pw-segmented"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"pw-seg-btn active"</span><span class="tag">&gt;</span>列表<span class="tag">&lt;/button&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"pw-seg-btn"</span><span class="tag">&gt;</span>网格<span class="tag">&lt;/button&gt;</span><br>
+<span class="tag">&lt;/div&gt;</span><br><br>
+<span class="comment">/* CSS 实现 */</span><br>
+<span class="sel">.pw-segmented</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">display</span><span class="punc">:</span> <span class="val">flex</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">gap</span><span class="punc">:</span> <span class="val">4px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">var(--bg-button)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-pill)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">4px</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.pw-seg-btn</span> <span class="punc">{</span> <span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-pill)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.pw-seg-btn:active</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.85)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.pw-seg-btn.active</span> <span class="punc">{</span> <span class="prop">background</span><span class="punc">:</span> <span class="val">var(--bg-active)</span><span class="punc">;</span> <span class="punc">}</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">强调色选择器 accent-picker <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">自定义的颜色选择器，Frostart 中用于快速切换全站的主题色</p>
+            <div class="demo-stage fs-accent">
+                <div class="demo-accent-picker">
+                    <button class="demo-accent-swatch active" style="background:#5b6ee1" title="靛蓝"></button>
+                    <button class="demo-accent-swatch" style="background:#7c3aed" title="紫"></button>
+                    <button class="demo-accent-swatch" style="background:#0ea5e9" title="天蓝"></button>
+                    <button class="demo-accent-swatch" style="background:#10b981" title="翠绿"></button>
+                    <button class="demo-accent-swatch" style="background:#f59e0b" title="琥珀"></button>
+                    <button class="demo-accent-swatch" style="background:#ef4444" title="红"></button>
+                    <button class="demo-accent-swatch" style="background:#ec4899" title="粉"></button>
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"accent-picker"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"accent-swatch active"</span> <span class="attr">style</span>=<span class="str">"background:#5b6ee1"</span><span class="tag">&gt;&lt;/button&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"accent-swatch"</span> <span class="attr">style</span>=<span class="str">"background:#7c3aed"</span><span class="tag">&gt;&lt;/button&gt;</span><br>
+<span class="tag">&lt;/div&gt;</span><br><br>
+<span class="comment">/* CSS 实现 */</span><br>
+<span class="sel">.accent-picker</span> <span class="punc">{</span> <span class="prop">display</span><span class="punc">:</span> <span class="val">flex</span><span class="punc">;</span> <span class="prop">gap</span><span class="punc">:</span> <span class="val">8px</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.accent-swatch</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">width</span><span class="punc">:</span> <span class="val">28px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">height</span><span class="punc">:</span> <span class="val">28px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">50%</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">2px solid transparent</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">transform 0.15s ease</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.accent-swatch:hover</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(1.12)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.accent-swatch.active</span> <span class="punc">{</span> <span class="prop">border-color</span><span class="punc">:</span> <span class="val">var(--text-primary)</span><span class="punc">;</span> <span class="punc">}</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- =========================================
+         输入控件
+         ========================================= -->
+    <div class="card" id="sec-forms">
+        <h2 class="section-title">输入控件</h2>
+        <p class="section-intro">数字输入与文本输入框，遵循 PhasWer 胶囊形 / 小圆角的统一设计语言</p>
+
+        <div class="subsection">
+            <h3 class="subsection-title">数字输入 pw-number <span class="src-tag pw">PW</span></h3>
+            <p class="subsection-desc">全站通用的数字输入框，与 settings-search 类似，配 pw-unit 可以在后面加单位</p>
+            <div class="demo-stage left" style="gap:12px;">
+                <div><input type="number" class="pw-number" value="128" style="width:80px;"> <span class="pw-unit">MB</span></div>
+                <p class="control-hint">分配给应用的内存大小，建议不低于 128MB</p>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="str">"number"</span> <span class="attr">class</span>=<span class="str">"pw-number"</span> <span class="attr">value</span>=<span class="str">"128"</span><span class="tag">&gt;</span><br>
+<span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"pw-unit"</span><span class="tag">&gt;</span>MB<span class="tag">&lt;/span&gt;</span><br><br>
+<span class="comment">/* CSS 实现 - 隐藏原生 spin button */</span><br>
+<span class="sel">.pw-number</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">-webkit-appearance</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">8px 12px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">var(--border-glass)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-sm)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.pw-number::-webkit-inner-spin-button</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">-webkit-appearance</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">display</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span><br>
+<span class="punc">}</span>
+            </div>
+        </div>
+
+        <div class="subsection" id="text-input-demo">
+            <h3 class="subsection-title">文本输入 text-input <span class="src-tag fs">FS</span> <span class="src-tag pw">PW</span></h3>
+            <p class="subsection-desc">全站各种输入框的集合，从 Frostart 的设置搜索到主站的密码输入、批量重命名、EXIF 编辑等等</p>
+            <!-- 类型1：设置搜索框（Frostart：容器+内层透明输入+前导图标） -->
+            <div class="demo-stage fs-accent left">
+                <div class="demo-form-group">
+                    <label>设置搜索 settings-search <span class="src-tag fs">FS</span></label>
+                    <div class="demo-settings-search">
+                        <svg class="demo-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="text" class="demo-settings-search-input" placeholder="搜索设置项...">
+                    </div>
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* ===== 类型1：设置搜索（容器+透明内层+图标） ===== */</span><br>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"settings-search"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;svg</span> <span class="attr">class</span>=<span class="str">"search-icon"</span><span class="tag">&gt;...&lt;/svg&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;input</span> <span class="attr">class</span>=<span class="str">"settings-search-input"</span> <span class="attr">placeholder</span>=<span class="str">"搜索设置项..."</span><span class="tag">&gt;</span><br>
+<span class="tag">&lt;/div&gt;</span><br><br>
+<span class="sel">.settings-search</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">height</span><span class="punc">:</span> <span class="val">44px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">9999px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">rgba(255,255,255,0.5)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">var(--border-glass)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-sm)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">display</span><span class="punc">:</span> <span class="val">flex</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">align-items</span><span class="punc">:</span> <span class="val">center</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.settings-search-input</span> <span class="punc">{</span> <span class="prop">border</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span> <span class="prop">background</span><span class="punc">:</span> <span class="val">transparent</span><span class="punc">;</span> <span class="prop">outline</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span> <span class="prop">flex</span><span class="punc">:</span> <span class="val">1</span><span class="punc">;</span> <span class="punc">}</span>
+            </div>
+
+            <!-- 类型2：密码输入（PhasWer encrypt-tool：胶囊+内凹阴影） -->
+            <div class="demo-stage left">
+                <div class="demo-form-group">
+                    <label>密码输入 password <span class="src-tag pw">PW</span></label>
+                    <input type="password" class="demo-pw-password" placeholder="输入主密码" value="••••••••">
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* ===== 类型2：密码输入（胶囊+内凹阴影） ===== */</span><br>
+<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="str">"password"</span> <span class="attr">placeholder</span>=<span class="str">"输入主密码"</span><span class="tag">&gt;</span><br><br>
+<span class="sel">input[type="password"]</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">14px 20px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">9999px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">2px solid rgba(255,255,255,0.3)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">rgba(255,255,255,0.5)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-inset)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">outline</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">background-color 0.3s ease</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">input[type="password"]:focus</span> <span class="punc">{</span> <span class="prop">background</span><span class="punc">:</span> <span class="val">rgba(255,255,255,0.7)</span><span class="punc">;</span> <span class="punc">}</span>
+            </div>
+
+            <!-- 类型3：批量重命名（PhasWer image-tools：胶囊+聚焦蓝边） -->
+            <div class="demo-stage left">
+                <div class="demo-form-group">
+                    <label>重命名输入 rename-input <span class="src-tag pw">PW</span></label>
+                    <input type="text" class="demo-rename-input" placeholder="文件名_{序号}">
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* ===== 类型3：批量重命名（胶囊+聚焦蓝边） ===== */</span><br>
+<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="str">"text"</span> <span class="attr">class</span>=<span class="str">"rename-input"</span> <span class="attr">placeholder</span>=<span class="str">"文件名_{序号}"</span><span class="tag">&gt;</span><br><br>
+<span class="sel">.rename-input</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">10px 20px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">9999px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">1.5px solid rgba(255,255,255,0.3)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">rgba(255,255,255,0.4)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">outline</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">border-color 0.2s ease</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.rename-input:focus</span> <span class="punc">{</span> <span class="prop">border-color</span><span class="punc">:</span> <span class="val">rgba(162,206,255,0.6)</span><span class="punc">;</span> <span class="punc">}</span>
+            </div>
+
+            <!-- 类型4：EXIF字段（PhasWer image-tools：8px紧凑圆角） -->
+            <div class="demo-stage left">
+                <div class="demo-form-group">
+                    <label>EXIF字段 exif-field-input <span class="src-tag pw">PW</span></label>
+                    <input type="text" class="demo-exif-input" placeholder="Canon EOS R5" value="f/2.8 1/200s ISO 400">
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* ===== 类型4：EXIF字段（8px紧凑圆角） ===== */</span><br>
+<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="str">"text"</span> <span class="attr">class</span>=<span class="str">"exif-field-input"</span> <span class="attr">placeholder</span>=<span class="str">"Canon EOS R5"</span><span class="tag">&gt;</span><br><br>
+<span class="sel">.exif-field-input</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">5px 8px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">1.5px solid rgba(0,0,0,0.1)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">8px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">font-size</span><span class="punc">:</span> <span class="val">13px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">rgba(255,255,255,0.6)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">border-color 0.2s ease</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.exif-field-input:focus</span> <span class="punc">{</span> <span class="prop">outline</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span> <span class="prop">border-color</span><span class="punc">:</span> <span class="val">rgba(162,206,255,0.6)</span><span class="punc">;</span> <span class="punc">}</span>
+            </div>
+
+            <!-- 类型5：小输入框（Frostart：16px自包含） -->
+            <div class="demo-stage fs-accent left">
+                <div class="demo-form-group">
+                    <label>小输入框 text-input <span class="src-tag fs">FS</span></label>
+                    <input type="text" class="demo-text-input-small" placeholder="网站名称">
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* ===== 类型5：小输入框（16px自包含） ===== */</span><br>
+<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="str">"text"</span> <span class="attr">class</span>=<span class="str">"text-input"</span> <span class="attr">placeholder</span>=<span class="str">"网站名称"</span><span class="tag">&gt;</span><br><br>
+<span class="sel">.text-input</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">10px 14px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">16px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">rgba(255,255,255,0.5)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">var(--border-glass)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">var(--shadow-sm)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">outline</span><span class="punc">:</span> <span class="val">none</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">background-color 0.15s ease</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.text-input:focus</span> <span class="punc">{</span> <span class="prop">background-color</span><span class="punc">:</span> <span class="val">var(--bg-hover)</span><span class="punc">;</span> <span class="punc">}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         导航
+         ========================================= -->
+    <div class="card" id="sec-navigation">
+        <h2 class="section-title">导航</h2>
+        <p class="section-intro">页面导航与内容切换组件</p>
+
+        <div class="subsection">
+            <h3 class="subsection-title">标签页 tab-nav <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">Frostart 设置页的横向标签切换，选中项会填充 accent-color</p>
+            <div class="demo-stage fs-accent">
+                <div class="demo-tab-nav">
+                    <button class="demo-tab-btn active">通用</button>
+                    <button class="demo-tab-btn">外观</button>
+                    <button class="demo-tab-btn">快捷键</button>
+                    <button class="demo-tab-btn">关于</button>
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;nav</span> <span class="attr">class</span>=<span class="str">"tab-nav"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"tab-btn active"</span><span class="tag">&gt;</span>通用<span class="tag">&lt;/button&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"tab-btn"</span><span class="tag">&gt;</span>外观<span class="tag">&lt;/button&gt;</span><br>
+<span class="tag">&lt;/nav&gt;</span><br><br>
+<span class="comment">/* CSS 实现 */</span><br>
+<span class="sel">.tab-nav</span> <span class="punc">{</span> <span class="prop">display</span><span class="punc">:</span> <span class="val">flex</span><span class="punc">;</span> <span class="prop">gap</span><span class="punc">:</span> <span class="val">4px</span><span class="punc">;</span> <span class="prop">padding</span><span class="punc">:</span> <span class="val">4px</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.tab-btn</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">10px 18px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-pill)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">all 0.15s ease</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.tab-btn:hover</span> <span class="punc">{</span> <span class="prop">background</span><span class="punc">:</span> <span class="val">var(--bg-hover)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.tab-btn.active</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">var(--accent-color)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">color</span><span class="punc">:</span> <span class="val">#fff</span><span class="punc">;</span><br>
+<span class="punc">}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         反馈
+         ========================================= -->
+    <div class="card" id="sec-feedback">
+        <h2 class="section-title">反馈</h2>
+        <p class="section-intro">用于向用户传达状态变化的反馈组件</p>
+
+        <div class="subsection">
+            <h3 class="subsection-title">通知 toast <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">点击按钮触发一条通知，2.5 秒后自动消失</p>
+            <div class="demo-stage fs-accent col">
+                <div style="display:flex;gap:12px;">
+                    <button class="demo-confirm-btn" id="toastDemoBtn">成功通知</button>
+                    <button class="demo-danger-btn" id="toastErrorBtn">错误通知</button>
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"toast success"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;svg&gt;...&lt;/svg&gt;</span> 操作成功<br>
+<span class="tag">&lt;/div&gt;</span><br><br>
+<span class="comment">/* CSS 实现 */</span><br>
+<span class="sel">.toast</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">display</span><span class="punc">:</span> <span class="val">inline-flex</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">gap</span><span class="punc">:</span> <span class="val">10px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">12px 22px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">24px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">backdrop-filter</span><span class="punc">:</span> <span class="val">blur(16px)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">0 10px 30px rgba(0,0,0,0.12)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">animation</span><span class="punc">:</span> <span class="val">toast-in 0.3s ease</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">@keyframes toast-in</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">from</span> <span class="punc">{</span> <span class="prop">opacity</span><span class="punc">:</span> <span class="val">0</span><span class="punc">;</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">translateY(20px) scale(0.92)</span><span class="punc">;</span> <span class="punc">}</span><br>
+&nbsp;&nbsp;<span class="prop">to</span> <span class="punc">{</span> <span class="prop">opacity</span><span class="punc">:</span> <span class="val">1</span><span class="punc">;</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">translateY(0) scale(1)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="punc">}</span><br>
+<span class="comment">/* 2.5s 后 JS 移除元素 */</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">进度条 storage-bar <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">进度条进入视口后会从 0 动画填充到目标值，也可以点击按钮手动重播</p>
+            <div class="demo-stage fs-accent col" style="gap:20px;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="demo-storage-bar"><div class="demo-storage-fill" data-width="35%"></div></div>
+                    <span style="font-size:13px;color:var(--text-secondary);">35%</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="demo-storage-bar"><div class="demo-storage-fill" data-width="68%"></div></div>
+                    <span style="font-size:13px;color:var(--text-secondary);">68%</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="demo-storage-bar"><div class="demo-storage-fill" data-width="92%"></div></div>
+                    <span style="font-size:13px;color:var(--text-secondary);">92%</span>
+                </div>
+                <button class="demo-confirm-btn" id="storageReplayBtn" style="padding:8px 18px;font-size:13px;">重播动画</button>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"storage-bar"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"storage-fill"</span> <span class="attr">style</span>=<span class="str">"width:35%"</span><span class="tag">&gt;&lt;/div&gt;</span><br>
+<span class="tag">&lt;/div&gt;</span><br><br>
+<span class="comment">/* CSS 实现 */</span><br>
+<span class="sel">.storage-bar</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">width</span><span class="punc">:</span> <span class="val">200px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">height</span><span class="punc">:</span> <span class="val">8px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-pill)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">rgba(255, 255, 255, 0.5)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.storage-fill</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">height</span><span class="punc">:</span> <span class="val">100%</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">var(--radius-pill)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">linear-gradient(90deg, var(--accent-color), rgba(255,255,255,0.6))</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">width 0.9s cubic-bezier(0.34, 1.56, 0.64, 1)</span><span class="punc">;</span><br>
+<span class="punc">}</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">更新提示与加载 <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">左边的红点用来提示有新内容，右边是加载状态</p>
+            <div class="demo-stage fs-accent" style="gap:40px;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <span class="demo-pulse-dot"></span>
+                    <span style="font-size:14px;color:var(--text-primary);">有新版本</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <span class="demo-spinner"></span>
+                    <span style="font-size:14px;color:var(--text-primary);">加载中</span>
+                </div>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"update-dot-pulse"</span><span class="tag">&gt;&lt;/span&gt;</span><br>
+<span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"spinner"</span><span class="tag">&gt;&lt;/span&gt;</span><br><br>
+<span class="comment">/* CSS 实现 - 脉冲提示点 */</span><br>
+<span class="sel">.update-dot-pulse</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">width</span><span class="punc">:</span> <span class="val">8px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">height</span><span class="punc">:</span> <span class="val">8px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">50%</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">background</span><span class="punc">:</span> <span class="val">#e84545</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">animation</span><span class="punc">:</span> <span class="val">pulse 2s infinite</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">@keyframes pulse</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="val">0%, 100%</span> <span class="punc">{</span> <span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">0 0 0 0 rgba(232,69,69,0.5)</span><span class="punc">;</span> <span class="punc">}</span><br>
+&nbsp;&nbsp;<span class="val">50%</span> <span class="punc">{</span> <span class="prop">box-shadow</span><span class="punc">:</span> <span class="val">0 0 0 5px transparent</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="punc">}</span><br><br>
+<span class="comment">/* CSS 实现 - 加载旋转 */</span><br>
+<span class="sel">.spinner</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">width</span><span class="punc">:</span> <span class="val">32px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">height</span><span class="punc">:</span> <span class="val">32px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border</span><span class="punc">:</span> <span class="val">3px solid rgba(0,0,0,0.1)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-top-color</span><span class="punc">:</span> <span class="val">var(--accent-color)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">50%</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">animation</span><span class="punc">:</span> <span class="val">spin 0.7s linear infinite</span><span class="punc">;</span><br>
+<span class="punc">}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         浮层
+         ========================================= -->
+    <div class="card" id="sec-overlays">
+        <h2 class="section-title">浮层</h2>
+        <p class="section-intro">覆盖在内容之上的交互层</p>
+
+        <div class="subsection">
+            <h3 class="subsection-title">模态框 modal <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">点击按钮弹出一个模态框，遮罩淡入，卡片本身会有一个缩放回弹的动画</p>
+            <div class="demo-stage fs-accent">
+                <button class="demo-confirm-btn" id="modalDemoBtn">打开模态框</button>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"modal-overlay"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"modal glass-effect"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h3</span> <span class="attr">class</span>=<span class="str">"modal-title"</span><span class="tag">&gt;</span>标题<span class="tag">&lt;/h3&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"modal-actions"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"modal-btn confirm-btn"</span><span class="tag">&gt;</span>确定<span class="tag">&lt;/button&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/div&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;/div&gt;</span><br>
+<span class="tag">&lt;/div&gt;</span><br><br>
+<span class="comment">/* CSS 实现 */</span><br>
+<span class="sel">.modal-overlay</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">position</span><span class="punc">:</span> <span class="val">fixed</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">inset</span><span class="punc">:</span> <span class="val">0</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">backdrop-filter</span><span class="punc">:</span> <span class="val">blur(4px)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.modal</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.9) translateY(20px)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.open .modal</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(1) translateY(0)</span><span class="punc">;</span> <span class="punc">}</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h3 class="subsection-title">右键菜单 context-menu <span class="src-tag fs">FS</span></h3>
+            <p class="subsection-desc">在下面区域里右键试试，菜单会从小到大弹出来，用的是毛玻璃效果（其实这也属于自定义控件，但鉴于新增了功能还是放到浮层里）</p>
+            <div class="demo-stage fs-accent" id="ctxDemoArea" style="min-height:120px;align-items:center;justify-content:center;border:2px dashed rgba(0,0,0,0.12);cursor:context-menu;">
+                <span style="color:var(--text-secondary);font-size:14px;user-select:none;">在此区域右键试试</span>
+            </div>
+            <div class="code-block"><span class="copy-btn">复制</span>
+<span class="comment">/* HTML 结构 */</span><br>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="str">"context-menu glass-effect show"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;<span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="str">"context-item"</span><span class="tag">&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="str">"ctx-icon"</span><span class="tag">&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;/span&gt;</span> 编辑<br>
+&nbsp;&nbsp;<span class="tag">&lt;/button&gt;</span><br>
+<span class="tag">&lt;/div&gt;</span><br><br>
+<span class="comment">/* CSS 实现 */</span><br>
+<span class="sel">.context-menu</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">position</span><span class="punc">:</span> <span class="val">fixed</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">6px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">24px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">backdrop-filter</span><span class="punc">:</span> <span class="val">blur(8px)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(0.92)</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">transition</span><span class="punc">:</span> <span class="val">transform 0.15s cubic-bezier(0.16, 1, 0.3, 1)</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.context-menu.show</span> <span class="punc">{</span> <span class="prop">transform</span><span class="punc">:</span> <span class="val">scale(1)</span><span class="punc">;</span> <span class="punc">}</span><br>
+<span class="sel">.context-item</span> <span class="punc">{</span><br>
+&nbsp;&nbsp;<span class="prop">padding</span><span class="punc">:</span> <span class="val">9px 14px</span><span class="punc">;</span><br>
+&nbsp;&nbsp;<span class="prop">border-radius</span><span class="punc">:</span> <span class="val">16px</span><span class="punc">;</span><br>
+<span class="punc">}</span><br>
+<span class="sel">.context-item:hover</span> <span class="punc">{</span> <span class="prop">background</span><span class="punc">:</span> <span class="val">var(--bg-hover)</span><span class="punc">;</span> <span class="punc">}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 设计令牌总览 -->
+    <div class="card" id="sec-tokens">
+        <h2 class="section-title">设计令牌总览</h2>
+        <p class="section-intro">
+            以下是我使用的所有 CSS 变量，你可以直接复制到自己的项目中使用。
+        </p>
+
+        <div class="subsection">
+            <table class="token-table">
+                <thead>
+                    <tr><th>类别</th><th>变量名</th><th>值</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td rowspan="7">背景颜色</td><td><code>--bg-dock</code></td><td>rgba(255, 255, 255, 0.4)</td></tr>
+                    <tr><td><code>--bg-card</code></td><td>rgba(255, 255, 255, 0.35)</td></tr>
+                    <tr><td><code>--bg-button</code></td><td>rgba(255, 255, 255, 0.4)</td></tr>
+                    <tr><td><code>--bg-main</code></td><td>rgba(255, 255, 255, 0.25)</td></tr>
+                    <tr><td><code>--bg-hover</code></td><td>rgba(0, 0, 0, 0.05)</td></tr>
+                    <tr><td><code>--bg-active</code></td><td>rgba(0, 0, 0, 0.1)</td></tr>
+                    <tr><td><code>--bg-gallery</code></td><td>rgba(255, 255, 255, 0.4)</td></tr>
+                    <tr><td rowspan="2">边框</td><td><code>--border-glass</code></td><td>2px solid rgba(255, 255, 255, 0.3)</td></tr>
+                    <tr><td><code>--border-light</code></td><td>2px solid rgba(255, 255, 255, 0.5)</td></tr>
+                    <tr><td rowspan="5">阴影</td><td><code>--shadow-sm</code></td><td>0 2px 8px .08, 0 4px 12px .04</td></tr>
+                    <tr><td><code>--shadow-md</code></td><td>0 3px 10px .10, 0 8px 24px .05</td></tr>
+                    <tr><td><code>--shadow-lg</code></td><td>0 4px 12px .10, 0 16px 40px .06</td></tr>
+                    <tr><td><code>--shadow-xxl</code></td><td>0 6px 16px .12, 0 24px 60px .06</td></tr>
+                    <tr><td><code>--shadow-inset</code></td><td>inset 0 3px 8px .12, inset 0 1px 3px .08</td></tr>
+                    <tr><td rowspan="6">圆角</td><td><code>--radius-sm</code></td><td>20px</td></tr>
+                    <tr><td><code>--radius-md</code></td><td>30px</td></tr>
+                    <tr><td><code>--radius-lg</code></td><td>40px</td></tr>
+                    <tr><td><code>--radius-xl</code></td><td>60px</td></tr>
+                    <tr><td><code>--radius-max</code></td><td>75px</td></tr>
+                    <tr><td><code>--radius-pill</code></td><td>9999px</td></tr>
+                    <tr><td rowspan="3">动画时长</td><td><code>--time-fast</code></td><td>0.15s</td></tr>
+                    <tr><td><code>--time-normal</code></td><td>0.3s</td></tr>
+                    <tr><td><code>--time-slow</code></td><td>0.8s</td></tr>
+                    <tr><td rowspan="2">文字</td><td><code>--text-primary</code></td><td>#333</td></tr>
+                    <tr><td><code>--text-secondary</code></td><td>#666</td></tr>
+                    <tr><td rowspan="3">主题色</td><td><code>--color-org</code></td><td>#00b351</td></tr>
+                    <tr><td><code>--color-gld</code></td><td>#64acff</td></tr>
+                    <tr><td><code>--color-ldc</code></td><td>#ffcc66</td></tr>
+                    <tr><td rowspan="2">布局</td><td><code>--header-height</code></td><td>80px</td></tr>
+                    <tr><td><code>--content-max-width</code></td><td>1300px</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 结语 -->
+    <div class="card" id="sec-outro">
+        <h2 class="section-title">写在最后</h2>
+        <p class="section-intro outro">
+            这些设计都是一次次调整出来的，如果这些内容对你有帮助非常欢迎取用。有什么建议或想法的话也欢迎通过各种方式联系我。到时候我可能也会拿这个网站来出一期视频（如果实在找不到选题的话awa<br><br>
+            <strong>— 灰鸢Gledery</strong>
+        </p>
+    </div>
+</main>
+
+<script src="js/common.js"></script>
+<script src="js/pages/design.js"></script>
+</body>
+</html>

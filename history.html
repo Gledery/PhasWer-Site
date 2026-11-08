@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>历史年表 | PhasWer 的小站</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/history.css">
+</head>
+<body>
+<script src="js/layout.js"></script>
+<header>
+    <div class="logo-group">
+        <img src="img/Phas-Wer-Dark.png" alt="PhasWer Logo">
+    </div>
+</header>
+<main>
+    <div class="card card-transparent">
+        <h2 style="text-align: center; margin-top: 60px;">历史年表</h2>
+        <div class="history-toolbar">
+            <div class="stats-line" id="statsLine"></div>
+            <div class="toolbar-actions">
+                <input type="text" id="searchInput" class="search-input" placeholder="搜索事件...">
+                <div class="pw-segmented" id="filterButtons" role="tablist" aria-label="筛选分类">
+                    <button type="button" class="pw-seg-btn active" data-filter="all">全部</button>
+                    <button type="button" class="pw-seg-btn" data-filter="org">组织发展</button>
+                    <button type="button" class="pw-seg-btn" data-filter="gld">灰鸢</button>
+                    <button type="button" class="pw-seg-btn" data-filter="ldc">小白狼</button>
+                </div>
+            </div>
+        </div>
+        <div class="table-wrapper">
+        <table class="history-table" id="historyTable">
+          <colgroup>
+            <col style="width: 100px;">
+            <col style="width: 30%;">
+            <col style="width: 35%;">
+            <col style="width: 35%;">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>年份</th>
+              <th>组织发展</th>
+              <th>灰鸢的哔哩哔哩</th>
+              <th>小白狼的哔哩哔哩</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody">
+            <!-- 动态生成内容 -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+</main>
+<script src="js/common.js"></script>
+<script src="js/data/history-data.js"></script>
+<script src="js/pages/history.js"></script>
+</body>
+</html>

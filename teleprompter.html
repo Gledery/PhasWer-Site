@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>提词器 | PhasWer 的小站</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/teleprompter.css">
+</head>
+<body class="tool-page">
+<script src="js/layout.js"></script>
+<header>
+    <div class="logo-group">
+        <img src="img/Phas-Wer-Dark.png" alt="PhasWer Logo">
+    </div>
+</header>
+
+<main>
+    <div class="tool-container">
+        <h2 class="tool-title">提词器</h2>
+
+        <div class="editor-section">
+            <textarea id="scriptInput" placeholder="在此输入或粘贴台词文稿...&#10;&#10;支持多段落，每段之间空一行。&#10;准备好之后点下方「开始」就行啦~"></textarea>
+        </div>
+
+        <div class="controls-grid">
+            <div class="control-group">
+                <label>滚动速度</label>
+                <input type="range" class="pw-slider" id="speedSlider" min="1" max="10" value="3">
+                <div class="value-display"><span id="speedValue">3</span> 级</div>
+            </div>
+
+            <div class="control-group">
+                <label>字号大小</label>
+                <input type="range" class="pw-slider" id="fontSizeSlider" min="24" max="120" value="48">
+                <div class="value-display"><span id="fontSizeValue">48</span>px</div>
+            </div>
+
+            <div class="control-group">
+                <label>行间距</label>
+                <input type="range" class="pw-slider" id="lineHeightSlider" min="12" max="30" value="18" step="1">
+                <div class="value-display"><span id="lineHeightValue">1.8</span></div>
+            </div>
+
+            <div class="control-group">
+                <label>文字颜色</label>
+                <select id="textColor">
+                    <option value="#ffffff">白色</option>
+                    <option value="#f0f0f0">浅灰</option>
+                    <option value="#ffeb3b">黄色</option>
+                    <option value="#4fc3f7">蓝色</option>
+                    <option value="#81c784">绿色</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>背景色</label>
+                <select id="bgColor">
+                    <option value="#111111">纯黑</option>
+                    <option value="#1a1a2e">深蓝黑</option>
+                    <option value="#0d1117">GitHub黑</option>
+                    <option value="#1e1e1e">VS Code黑</option>
+                    <option value="#2d2d2d">深灰</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>倒计时 (秒)</label>
+                <input type="range" class="pw-slider" id="countdownSlider" min="0" max="10" value="10">
+                <div class="value-display"><span id="countdownValue">10</span> 秒</div>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label>模式</label>
+            <div class="toggle-row">
+                <div class="toggle-btn" id="mirrorToggle" onclick="toggleMirror()">🪞 镜像</div>
+                <div class="toggle-btn active" id="guideToggle" onclick="toggleGuide()">📐 引导线</div>
+                <div class="toggle-btn" id="autoHideToggle" onclick="toggleAutoHide()">👁 自动隐藏栏</div>
+            </div>
+        </div>
+
+        <div class="button-row">
+            <button class="action-btn primary" id="startBtn" onclick="startPrompter()">▶ 开始</button>
+            <button class="action-btn secondary" onclick="loadSampleText()">📋 加载示例</button>
+            <button class="action-btn secondary" onclick="clearText()">🗑 清空</button>
+        </div>
+
+        <div class="shortcut-hint">
+            <kbd>Space</kbd> 播放/暂停 &nbsp; <kbd>↑</kbd><kbd>↓</kbd> 调速 &nbsp;
+            <kbd>M</kbd> 镜像 &nbsp; <kbd>F</kbd> 全屏 &nbsp; <kbd>Esc</kbd> 退出
+        </div>
+    </div>
+</main>
+
+<div class="prompter-overlay" id="prompterOverlay">
+    <div class="prompter-topbar" id="prompterTopbar">
+        <div class="topbar-info">
+            <span id="statusIndicator">⏸ 已暂停</span>
+            <span>速度: <strong id="topbarSpeed">5</strong></span>
+            <span>进度: <strong id="topbarProgress">0%</strong></span>
+            <span>已用: <strong id="topbarElapsed">00:00</strong></span>
+        </div>
+        <div class="topbar-actions">
+            <div class="topbar-btn" onclick="adjustSpeedInPrompter(1)">加速</div>
+            <div class="topbar-btn" onclick="adjustSpeedInPrompter(-1)">减速</div>
+            <div class="topbar-btn" onclick="toggleMirrorInPrompter()">镜像</div>
+            <div class="topbar-btn" onclick="toggleFullscreen()">全屏</div>
+            <div class="topbar-btn" onclick="resetScroll()">重置</div>
+            <div class="topbar-btn danger" onclick="exitPrompter()">✕ 退出</div>
+        </div>
+    </div>
+    <div class="prompter-scroll-area" id="scrollArea" onclick="togglePlayPause()">
+        <div class="prompter-content" id="prompterContent"></div>
+        <div class="progress-bar" id="progressBar"></div>
+        <div class="countdown-overlay" id="countdownOverlay">
+            <div class="countdown-number" id="countdownNumber">3</div>
+        </div>
+    </div>
+</div>
+
+<script src="js/pages/teleprompter.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

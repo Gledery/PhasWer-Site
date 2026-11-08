@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="PhasWer 数据看板">
+    <title>数据看板 | PhasWer 的小站</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/data.css">
+</head>
+<body>
+<script src="js/layout.js"></script>
+
+<header role="banner">
+    <div class="logo-group">
+        <a href="index.html"><img src="img/Phas-Wer-Dark.png" alt="PhasWer Logo"></a>
+    </div>
+</header>
+
+<main role="main">
+    <section class="page-hero">
+        <h1 class="page-hero-title">数据看板</h1>
+        <p class="page-hero-subtitle">
+            灰鸢Gledery 的哔哩哔哩账号数据追踪<br>
+            数据每日手动更新
+        </p>
+        <div class="hero-unlock" id="heroUnlock">
+            <div class="hero-unlock-inner">
+                <div class="lock-hint">输入密码以查看数据</div>
+                <input type="password" id="tablePassword" placeholder="输入密码" autocomplete="off">
+                <div class="lock-error" id="lockError">密码错误</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="card">
+        <h2 class="card-title">数据概览</h2>
+        <div class="stats-grid" id="statsGrid"></div>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">趋势图表</h2>
+        <div class="pw-segmented pw-segmented-wrap" id="chartToggle" role="tablist" aria-label="数据指标" style="width: fit-content; margin: 20px auto;"></div>
+        <div class="chart-range-bar" id="chartRangeBar" style="display:none;">
+            <span class="chart-range-label">时间范围</span>
+            <div class="chart-range-field">
+                <span class="chart-range-cap">开始</span>
+                <select id="rangeStart" class="chart-range-select" aria-label="开始节点"></select>
+            </div>
+            <span class="chart-range-sep">～</span>
+            <div class="chart-range-field">
+                <span class="chart-range-cap">结束</span>
+                <select id="rangeEnd" class="chart-range-select" aria-label="结束节点"></select>
+            </div>
+            <button type="button" id="rangeReset" class="pill-button chart-range-reset">重置</button>
+        </div>
+        <div class="chart-container">
+            <div class="chart-loading" id="chartLoading">图表加载中...</div>
+            <canvas id="trendChart" style="display:none;"></canvas>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">详细数据</h2>
+        <div class="table-lock-wrapper locked" id="tableLock">
+            <div class="table-lock-overlay" id="tableLockOverlay">
+                <div class="lock-hint">先输个密码（？</div>
+            </div>
+            <div class="table-search">
+                <input type="text" id="tableSearch" placeholder="搜索日期（如 2026/3）">
+            </div>
+            <div class="data-table-wrapper">
+                <table class="data-table" id="dataTable">
+                    <thead><tr id="tableHead"></tr></thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+                <div id="loadMoreWrap" style="text-align:center;padding:15px 0;display:none;">
+                    <button id="loadMoreBtn" class="pill-button">加载更多</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="copyright" role="contentinfo"></footer>
+</main>
+
+<script src="js/common.js"></script>
+<script src="js/crypto.js"></script>
+<script src="js/data/data-all.js"></script>
+<script src="js/pages/data.js"></script>
+</body>
+</html>
