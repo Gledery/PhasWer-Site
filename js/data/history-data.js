@@ -76,6 +76,7 @@ var eventData = [
       { type: 'org', time: '06-25', desc: 'Frostart上线' },
       { type: 'gld', time: '07-26', desc: '500000 播放' },
       { type: 'gld', time: '08-06', desc: '5000 粉丝' },
+      { type: 'gld', time: '10-19', desc: '4 周年：216 个作品，52.3 万播放' },
     ]
   }
 ];
