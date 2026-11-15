@@ -2,8 +2,6 @@
   <img src="img/Phas-Wer-Dark.png" width="280" alt="PhasWer Logo">
 </p>
 
-<h1 align="center">PhasWer 的小站</h1>
-
 <p align="center">
   <a href="https://phaswer.pages.dev/"><img src="https://img.shields.io/badge/在线预览-phaswer.pages.dev-%230969da"></a>
   <a href="https://phaswer.pages.dev/changelog"><img src="https://img.shields.io/badge/更新日志-版本时间线-%23a855f7"></a>
