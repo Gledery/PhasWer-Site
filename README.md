@@ -5,7 +5,6 @@
 <p align="center">
   <a href="https://phaswer.pages.dev/"><img src="https://img.shields.io/badge/在线预览-phaswer.pages.dev-%230969da"></a>
   <a href="https://phaswer.pages.dev/changelog"><img src="https://img.shields.io/badge/更新日志-版本时间线-%23a855f7"></a>
-  <a href="https://phaswer.pages.dev/design"><img src="https://img.shields.io/badge/设计语言-毛玻璃视觉规范-%23f0b429"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-GPL--3.0-%23808080"></a>
 </p>
 
