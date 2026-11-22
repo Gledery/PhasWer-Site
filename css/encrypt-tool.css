@@ -73,7 +73,15 @@ textarea::placeholder {
     transition: transform var(--time-normal) ease, background-color var(--time-normal) ease, border-color var(--time-normal) ease, color var(--time-normal) ease;
 }
 
-.drop-zone:hover,
+@media (hover: hover) {
+    .drop-zone:hover {
+        border-color: var(--accent);
+        background: rgba(162, 206, 255, 0.1);
+        transform: scale(1.01);
+    }
+}
+
+/* 拖拽悬停态与 hover 无关，触屏同样可用，保留在顶层 */
 .drop-zone.dragover {
     border-color: var(--accent);
     background: rgba(162, 206, 255, 0.1);
@@ -137,9 +145,11 @@ button, .tool-btn {
     transition: transform var(--time-fast) ease, background-color var(--time-fast) ease;
 }
 
-button:hover, .tool-btn:hover {
-    transform: scale(1.05);
-    background-color: rgba(0, 0, 0, 0.05);
+@media (hover: hover) {
+    button:hover, .tool-btn:hover {
+        transform: scale(1.05);
+        background-color: rgba(0, 0, 0, 0.05);
+    }
 }
 
 button:active, .tool-btn:active {

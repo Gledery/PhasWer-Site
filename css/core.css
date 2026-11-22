@@ -337,10 +337,12 @@ main {
     box-shadow var(--time-fast) ease;
 }
 
-.dock button:hover {
-  transform: scale(1.08);
-  background-color: var(--bg-active);
-  box-shadow: var(--shadow-md);
+@media (hover: hover) {
+  .dock button:hover {
+    transform: scale(1.08);
+    background-color: var(--bg-active);
+    box-shadow: var(--shadow-md);
+  }
 }
 
 .dock button:active {
@@ -410,10 +412,12 @@ main {
     box-shadow var(--time-fast) ease;
 }
 
-.pill-button:hover {
-  transform: scale(1.08);
-  background-color: var(--bg-hover);
-  box-shadow: var(--shadow-md);
+@media (hover: hover) {
+  .pill-button:hover {
+    transform: scale(1.08);
+    background-color: var(--bg-hover);
+    box-shadow: var(--shadow-md);
+  }
 }
 
 .pill-button:active {
@@ -442,10 +446,12 @@ main {
     box-shadow var(--time-fast) ease;
 }
 
-.big-button:hover {
-  transform: scale(1.05);
-  background-color: var(--bg-hover);
-  box-shadow: var(--shadow-lg);
+@media (hover: hover) {
+  .big-button:hover {
+    transform: scale(1.05);
+    background-color: var(--bg-hover);
+    box-shadow: var(--shadow-lg);
+  }
 }
 
 .big-button:active {
@@ -491,9 +497,11 @@ main {
   transition: transform var(--time-fast) ease, box-shadow var(--time-fast) ease;
 }
 
-.pw-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.22);
+@media (hover: hover) {
+  .pw-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.22);
+  }
 }
 
 .pw-slider::-webkit-slider-thumb:active {
@@ -622,9 +630,11 @@ main {
 }
 
 /* 柔和浮起：悬停时整体轻微放大 + 浮起投影 */
-.pw-switch:hover .pw-switch-track {
-  transform: scale(1.05);
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.14);
+@media (hover: hover) {
+  .pw-switch:hover .pw-switch-track {
+    transform: scale(1.05);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.14);
+  }
 }
 
 /* 按下(:active)：回缩 + 内凹加深，优先级高于悬停 */
@@ -877,9 +887,11 @@ body.tool-page main {
   transform: scale(1);
 }
 
-.corner-kaomoji:hover .face {
-  transform: scale(1.1);
-  background: var(--bg-gallery);
+@media (hover: hover) {
+  .corner-kaomoji:hover .face {
+    transform: scale(1.1);
+    background: var(--bg-gallery);
+  }
 }
 
 .corner-kaomoji:active .face {
@@ -1059,25 +1071,3 @@ body.tool-page main {
   .page-hero-subtitle { font-size: 14px; line-height: 1.8; }
 }
 
-/* =========================================
-   触屏设备：关闭位移型 hover 以避免 tap 后粘连
-   保留颜色 / 阴影变化，只重置 transform
-   新增带位移的 hover 时，把选择器加进这里
-   ========================================= */
-@media (hover: none) {
-  .dock button:hover,
-  .pill-button:hover,
-  .big-button:hover,
-  .pw-switch:hover .pw-switch-track,
-  .corner-kaomoji:hover .face,
-  .member-card-large:hover,
-  .member-card-large:hover .member-avatar,
-  .group-section:hover,
-  .tool-tile:hover,
-  .org-card:hover,
-  .org-card:hover .org-avatar,
-  .video-card:hover,
-  .demo-gradient-preset:hover {
-    transform: none !important;
-  }
-}

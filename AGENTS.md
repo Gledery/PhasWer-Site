@@ -11,7 +11,7 @@
 - **入场动画走纯 CSS `@starting-style`**：header、hero、logo、dock、sidebar、page-hero 等「页面载入即出现」的元素，入场一律用 [core.css](./css/core.css) / [design.css](./css/design.css) 里的 `@starting-style` 实现——**默认状态 = 可见**，`@starting-style` 定义「首次渲染前」的隐藏态，浏览器自动过渡。**禁止**再用 JS `setTimeout` 加 `.animate-in`、禁止用全局 `.animate-in { ... !important }`（这套已废弃，会导致 hover/active 被迫叠 `!important` 级联）。dock 按钮因需要 stagger + hover 同属性，用 `@keyframes` + `animation-fill-mode: backwards`（动画结束后 transform 交还常规样式，hover 不受污染）。唯一例外是**卡片滚动揭示**仍由 [common.js](./js/common.js) 的 `IntersectionObserver` 加 `.animate-in`（因为要等滚入视口才触发，`@starting-style` 做不到）。角落颜文字也保留 JS `.animate-in`（动态插入需双 rAF 确保初始态渲染后再过渡）
 - **不要给入场动画加全局启动延迟**：早期 JS 驱动方案下需要 0.4s 延迟作为人工缓冲窗口，但 `@starting-style` 由浏览器原生保证「首帧已布局完成」才触发过渡，不存在 JS 那种「类加上去但布局还没算好」的竞态，人工延迟多余。不要为了「防鬼畜」再加回 `--enter-delay` 或类似的全局延迟令牌。
 - **不引入框架**：原生 HTML / CSS / JS，保持代码可直接阅读，第三方库一律按需懒加载
-- **hover 必须触屏门控**：所有 `transform` 型 hover（scale / translateY）在触屏设备上 tap 后会粘连，必须能被 [core.css](./css/core.css) 末尾的 `@media (hover: none)` 重置掉。新增带位移的 hover 时，记得把选择器加进那个重置块
+- **transform 型 hover 一律包进 `@media (hover: hover)`**：hover 反馈天生是给指针设备的，触屏 tap 后 hover 会粘连。在规则源头门控，不要再用末尾 `@media (hover: none)` + `!important` 重置的手动例外清单（该模式已废弃）
 - **不要用 `transition: all`**：必须列出实际变化的属性（如 `transition: transform 0.15s ease, background-color 0.15s ease`）。`all` 会监听所有属性变化、性能差，还可能对 JS 动态改的属性产生意外动画
 - **`html { zoom: 90% }` 是历史遗留**：由于历史原因全站布局、间距、字号都按 90% 缩放校准过，现在移除或改成 `font-size` 方案会导致所有尺寸失准，属于无法回滚的技术债，**不要尝试移除**
 

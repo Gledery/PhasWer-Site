@@ -15,8 +15,10 @@
     transition: transform var(--time-normal) ease;
 }
 
-.stat-card:hover {
-    transform: translateY(-5px);
+@media (hover: hover) {
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
 }
 
 .stat-label {

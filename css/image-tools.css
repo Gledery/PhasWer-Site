@@ -54,9 +54,11 @@
     position: relative;
 }
 
-.upload-box:hover {
-    transform: scale(1.01);
-    background-color: rgba(0, 0, 0, 0.03);
+@media (hover: hover) {
+    .upload-box:hover {
+        transform: scale(1.01);
+        background-color: rgba(0, 0, 0, 0.03);
+    }
 }
 
 .upload-box.dragover {
@@ -162,12 +164,14 @@
     display: flex;
 }
 
-.fullscreen-close:hover {
-    background: rgba(255, 80, 80, 0.15);
-    color: #c62828;
-    border-color: rgba(255, 80, 80, 0.4);
-    box-shadow: var(--shadow-md);
-    transform: scale(1.1);
+@media (hover: hover) {
+    .fullscreen-close:hover {
+        background: rgba(255, 80, 80, 0.15);
+        color: #c62828;
+        border-color: rgba(255, 80, 80, 0.4);
+        box-shadow: var(--shadow-md);
+        transform: scale(1.1);
+    }
 }
 
 /* 小尺寸按钮：按压反馈更强（见 AGENTS.md） */
@@ -241,11 +245,13 @@
     padding: 0;
 }
 
-.preview-item .remove-btn:hover {
-    background: rgba(255, 80, 80, 0.85);
-    color: white;
-    border-color: rgba(255, 80, 80, 0.6);
-    transform: scale(1.1);
+@media (hover: hover) {
+    .preview-item .remove-btn:hover {
+        background: rgba(255, 80, 80, 0.85);
+        color: white;
+        border-color: rgba(255, 80, 80, 0.6);
+        transform: scale(1.1);
+    }
 }
 
 /* 重置文件名按钮 */
@@ -264,11 +270,13 @@
     padding: 0;
 }
 
-.preview-item .reset-name-btn:hover {
-    background: rgba(162, 206, 255, 0.3);
-    color: #0c3588;
-    border-color: rgba(162, 206, 255, 0.5);
-    transform: scale(1.1);
+@media (hover: hover) {
+    .preview-item .reset-name-btn:hover {
+        background: rgba(162, 206, 255, 0.3);
+        color: #0c3588;
+        border-color: rgba(162, 206, 255, 0.5);
+        transform: scale(1.1);
+    }
 }
 
 /* 图片信息行 */
@@ -440,7 +448,9 @@
     transition: transform var(--time-fast) ease, background-color var(--time-fast) ease, box-shadow var(--time-fast) ease;
 }
 
-.preview-item .download-btn:hover { transform: scale(1.05); box-shadow: var(--shadow-md); }
+@media (hover: hover) {
+    .preview-item .download-btn:hover { transform: scale(1.05); box-shadow: var(--shadow-md); }
+}
 .preview-item .download-btn:active { transform: scale(0.85); }
 
 /* 总览统计条 */
@@ -654,9 +664,11 @@
     box-shadow: var(--shadow-inset);
 }
 
-.watermark-upload-area:hover {
-    transform: scale(1.01);
-    background-color: rgba(0, 0, 0, 0.03);
+@media (hover: hover) {
+    .watermark-upload-area:hover {
+        transform: scale(1.01);
+        background-color: rgba(0, 0, 0, 0.03);
+    }
 }
 
 .watermark-upload-area.dragover {
@@ -723,10 +735,12 @@
     transition: transform var(--time-fast) ease, background-color var(--time-fast) ease, color var(--time-fast) ease;
 }
 
-.remove-watermark-btn:hover {
-    background: rgba(255, 80, 80, 0.85);
-    color: white;
-    transform: scale(1.1);
+@media (hover: hover) {
+    .remove-watermark-btn:hover {
+        background: rgba(255, 80, 80, 0.85);
+        color: white;
+        transform: scale(1.1);
+    }
 }
 
 .remove-watermark-btn:active { transform: scale(0.9); }
@@ -822,9 +836,11 @@
     font-weight: 600;
 }
 
-.big-button:hover {
-    transform: scale(1.05);
-    background-color: rgba(0, 0, 0, 0.05);
+@media (hover: hover) {
+    .big-button:hover {
+        transform: scale(1.05);
+        background-color: rgba(0, 0, 0, 0.05);
+    }
 }
 
 .big-button:active {
@@ -937,9 +953,11 @@
     transition: transform var(--time-fast) ease, background-color var(--time-fast) ease;
 }
 
-.preview-overlay-close:hover {
-    background: rgba(0, 0, 0, 0.06);
-    transform: scale(1.05);
+@media (hover: hover) {
+    .preview-overlay-close:hover {
+        background: rgba(0, 0, 0, 0.06);
+        transform: scale(1.05);
+    }
 }
 
 .preview-overlay-close:active { transform: scale(0.88); }

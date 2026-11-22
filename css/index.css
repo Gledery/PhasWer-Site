@@ -14,9 +14,11 @@
   transition: transform var(--time-normal) ease, background-color var(--time-normal) ease, box-shadow var(--time-normal) ease;
 }
 
-.member-card-large:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-lg);
+@media (hover: hover) {
+  .member-card-large:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+  }
 }
 
 .member-card-large:active {
@@ -33,8 +35,10 @@
   transition: transform var(--time-normal) ease;
 }
 
-.member-card-large:hover .member-avatar {
-  transform: scale(1.05) rotate(2deg);
+@media (hover: hover) {
+  .member-card-large:hover .member-avatar {
+    transform: scale(1.05) rotate(2deg);
+  }
 }
 
 .member-name {
@@ -74,8 +78,10 @@
   transition: transform var(--time-normal) ease;
 }
 
-.group-section:hover {
-  transform: translateY(-10px);
+@media (hover: hover) {
+  .group-section:hover {
+    transform: translateY(-10px);
+  }
 }
 
 .group-section .tile-bg-icon {
@@ -150,10 +156,12 @@
   transition: transform var(--time-normal) ease, background-color var(--time-normal) ease, box-shadow var(--time-normal) ease;
 }
 
-.tool-tile:hover {
-  transform: translateY(-10px);
-  background-color: rgba(255, 255, 255, 0.45);
-  box-shadow: var(--shadow-lg);
+@media (hover: hover) {
+  .tool-tile:hover {
+    transform: translateY(-10px);
+    background-color: rgba(255, 255, 255, 0.45);
+    box-shadow: var(--shadow-lg);
+  }
 }
 
 .tool-tile:active {
@@ -201,9 +209,11 @@
   transition: transform var(--time-normal) ease, background-color var(--time-normal) ease, box-shadow var(--time-normal) ease;
 }
 
-.org-card:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-lg);
+@media (hover: hover) {
+  .org-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+  }
 }
 
 .org-card:active {
@@ -227,8 +237,10 @@
   transition: transform var(--time-normal) ease;
 }
 
-.org-card:hover .org-avatar {
-  transform: scale(1.08) rotate(2deg);
+@media (hover: hover) {
+  .org-card:hover .org-avatar {
+    transform: scale(1.08) rotate(2deg);
+  }
 }
 
 .org-name {
@@ -271,9 +283,11 @@
   transition: transform var(--time-normal) ease, background-color var(--time-normal) ease, box-shadow var(--time-normal) ease;
 }
 
-.video-card:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-lg);
+@media (hover: hover) {
+  .video-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+  }
 }
 
 .video-card:active {

@@ -128,8 +128,10 @@
     transition: transform var(--time-fast) ease, background-color var(--time-fast) ease;
 }
 
-.action-btn:hover {
-    transform: scale(1.05);
+@media (hover: hover) {
+    .action-btn:hover {
+        transform: scale(1.05);
+    }
 }
 
 .action-btn:active {

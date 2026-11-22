@@ -73,8 +73,10 @@ background: color-mix(in srgb, var(--color-ldc) 10%, transparent);
 box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       }
 
-      .event-cell:hover {
-transform: translateY(-5px);
+      @media (hover: hover) {
+        .event-cell:hover {
+          transform: translateY(-5px);
+        }
       }
 
       .event-cell:active {
