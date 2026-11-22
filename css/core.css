@@ -48,6 +48,11 @@
   --color-selection: rgba(171, 138, 255, 0.35);
   --color-divider: rgba(0, 0, 0, 0.2);
 
+  /* changelog 版本级别指示色（侧栏圆点与卡片左边框）：大 / 次 / 修订，由深到浅 */
+  --level-major: #27ae60;
+  --level-minor: #6dbf8b;
+  --level-patch: #b8deca;
+
   /* 渐变 */
   --gradient-page: linear-gradient(135deg, #D3E7FF 0%, #EAE2FF 100%);
   --gradient-wallpaper: linear-gradient(135deg, #e8f4ff 0%, #d7e4ff 50%, #e8fffe 100%);

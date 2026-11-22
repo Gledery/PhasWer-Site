@@ -5,13 +5,6 @@ function getVersionLevel(v) {
     return 'patch';
 }
 
-var LEVEL_COLORS = {
-    major: '#27ae60',
-    minor: '#6dbf8b',
-    patch: '#b8deca'
-};
-
-
 function renderSidebar() {
     var sidebar = document.getElementById('sidebar');
     var currentMajor = null;
@@ -29,7 +22,7 @@ function renderSidebar() {
         item.dataset.version = v.version;
         var dot = document.createElement('span');
         dot.className = 'sidebar-dot';
-        dot.style.background = LEVEL_COLORS[getVersionLevel(v.version)];
+        dot.dataset.level = getVersionLevel(v.version);
         item.appendChild(dot);
         item.appendChild(document.createTextNode('v' + v.version));
         item.addEventListener('click', function() {
